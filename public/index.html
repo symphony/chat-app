@@ -10,13 +10,31 @@
     integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="scripts/index.js" ></script>
+  <script src="scripts/index.js"></script>
 
   <title>Socket.io</title>
 </head>
 
 <body>
-  Hello
+  <header>
+    <h1>Hello</h1>
+    <button id="connect">Connect</button>
+    <button id="disconnect">Disconnect</button>
+  </header>
+
+  <main>
+    <br>
+    <div id="notify">
+      <h3>Server:</h3>
+      <ul></ul>
+    </div>
+    <br>
+    <div id="announce">
+      <h3>log:</h3>
+      <ul></ul>
+    </div>
+    <br>
+  </main>
 </body>
 
 </html>
