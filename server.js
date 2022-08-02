@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static('public'));
-app.use(morgan());
+app.use(morgan);
 
 const httpServer = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}.`);

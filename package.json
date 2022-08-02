@@ -1,7 +1,7 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chatting App to demonstrate Socket.io library",
   "main": "server.js",
   "type": "module",
   "scripts": {
