@@ -4,16 +4,22 @@ export const listen = (httpServer) => {
   const server = new socketio.Server(httpServer);
 
   server.on('connection', (client) => {
-    console.log(client.id, 'connected', client.data);
+    const id = client.id;
+    let username = null;
+
+    client.on('name', (data) => {
+      username = data.username;
+      server.except(id).emit('announce', username + ' is online');
+    });
+
     client.on('disconnect', () => {
-      console.log(client.id, 'disconnected');
+      console.log(id, 'disconnected');
     });
 
     // Broadcast Message
-    server.emit('announce', client.id + ' is online');
 
     // Client Message
-    server.to(client.id).emit('notify', client.id + ' is online');
+    server.to(id).emit('notify', 'Your ID is: ' + id);
 
   });
 

@@ -2,9 +2,15 @@ $(() => {
   let socket = null;
 
   // = events =
-  $('body > header > #connect').on('click', () => {
-    if (socket) return;
-    socket = connect();
+  $('body > header > #connect').on('submit', function(e) {
+    e.preventDefault();
+
+    $form = $(this).find('input');
+    const username = $form.val().trim();
+    if (socket || !username) return;
+    $form.val('');
+
+    socket = connect({ username });
   });
 
   $('body > header > #disconnect').on('click', () => {
@@ -15,11 +21,12 @@ $(() => {
 });
 
 // functions
-const connect = () => {
-  const socket = io();
+const connect = (data) => {
+  const socket = io(data);
 
   socket.on('connect', (e) => {
-    console.log('Joined as:', socket.id);
+    socket.emit('name', data);
+    console.log('Joined as:', data.username);
   });
 
   socket.on('announce', (data) => {
