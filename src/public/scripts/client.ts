@@ -27,14 +27,14 @@ $(() => {
 
   $chatform.on('submit', (e) => {
     e.preventDefault();
-    const $input = $mainHeader.find('input');
+    const $input = $chatform.find('input');
     const message = $input?.val()?.toString().trim();
 
     // form validation
     if (!socket || !message) return;
 
     $input.val('');
-    socket.emit('send', { body: message });
+    socket.emit('send', message);
   });
 });
 
@@ -65,7 +65,7 @@ const connect = (data: User) => {
   socket.on('chat', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
-    $('body > main > section#chat #chatbox ul').html($div);
+    $('body > main > section#chat #chatbox ul').append($div);
   });
 
   return socket;
