@@ -2,10 +2,18 @@ import * as socketio from 'socket.io';
 import { Server } from 'http'; // types
 
 const onlineUsers = new Map();
-const r1: [RegExp, string] = [/[^0-9a-zA-Z_-]+/, ''];
-const r2: [RegExp, string] = [/n+[\s_\.\-]?[i1l|]+[\s_\.\-]?[gq]+[_\.\-\s]*[gq69]+[e3a4i\s]*[ra4s]*s?/ig, '****'];
-const r3: [RegExp, string] = [/(f|ph)?[\s_\.\-]?[a4]+.?[gq69]+[_\.\-\s]*[gq69]+[o0\s]+[t7]*s?/ig, '****'];
-const c = (s: string) => s.replace(...r2).replace(...r3).trim();
+
+// = helpers =
+const sanitize = (s: string) => {
+  const reg = /[^0-9a-zA-Z_-]+/;
+  return s.replace(reg, '');
+};
+
+const scrub = (s: string) => {
+  const r1: [RegExp, string] = [/n+[\s_\.\-]?[i1l|]+[\s_\.\-]?[gq]+[_\.\-\s]*[gq69]+[e3a4i\s]*[ra4s]*s?/ig, '****'];
+  const r2: [RegExp, string] = [/(f|ph)?[\s_\.\-]?[a4]+.?[gq69]+[_\.\-\s]*[gq69]+[o0\s]+[t7]*s?/ig, '****'];
+  return s.replace(...r1).replace(...r2).trim()
+};
 
 export const listen = (httpServer: Server) => {
   const server = new socketio.Server(httpServer);
@@ -16,7 +24,7 @@ export const listen = (httpServer: Server) => {
     let username: string | null = null;
 
     client.on('login', (data: User, callback) => {
-      username = c(data.username.replace(...r1));
+      username = scrub(sanitize(data.username));
       onlineUsers.set(id, { id, username })
 
       console.log('Users:', onlineUsers);
@@ -29,8 +37,9 @@ export const listen = (httpServer: Server) => {
     });
 
     client.on('send', (body: string) => {
-      server.to(id).emit('outgoing', `${c(body)} [${username}]`)
-      server.except(id).emit('incoming', `[${username}] ${c(body)}`)
+      const message = scrub(body);
+      server.to(id).emit('outgoing', `${message} [${username}]`)
+      server.except(id).emit('incoming', `[${username}] ${message}`)
     });
 
     // Client Message
@@ -42,3 +51,5 @@ export const listen = (httpServer: Server) => {
 
   return server;
 };
+
+
