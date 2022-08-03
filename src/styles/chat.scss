@@ -1,31 +1,25 @@
-main {
-  // display: flex;
+// chatbox
+section#chat {
+  .chatbox {
+    @include font-scale;
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0;
+    padding: 0.1em 1em;
+    border-radius: $radius;
+    color: aqua;
+    background-color: rgb(90, 111, 119);
+    min-height: 30rem;
+    max-width: 40rem;
 
-  // chatbox
-  section#chat {
+    li:after {
+      content: "\A";
+      float: left;
+      white-space: pre;
+    }
 
-
-    #chatbox {
-      @include font-scale;
-      display: flex;
-      flex-direction: column;
-      margin: 4rem 0;
-      padding: 0.1em 1em;
-      border-radius: $radius;
-      color: aqua;
-      background-color: rgb(90, 111, 119);
-      min-height: 30rem;
-      max-width: 40rem;
-
-      li:after {
-        content: "\A";
-        float: left;
-        white-space: pre;
-      }
-
-      .right {
-        text-align: right;
-      }
+    .right {
+      text-align: right;
     }
   }
 }

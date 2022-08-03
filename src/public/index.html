@@ -28,26 +28,29 @@
   </head>
 
   <body>
-    <header id="#header">
+    <header id="header">
       <nav>
 
-        <h1>Please Login</h1>
-        <div id="notify">
-          <h3></h3>
-          <ul></ul>
-        </div>
+        <section class="login">
+          <header>
+            <h1>Please Login</h1>
+            <div id="notify">
+              <h3></h3>
+              <ul class="collection"></ul>
+            </div>
+          </header>
 
-        <section>
-          <div class="connect">
-            <form class="input-field">
-              <input maxlength="30" placeholder="" id="username" type="text" class="validate blue-grey darken-4">
+          <main>
+            <form class="connect input-field">
+              <input type="text" class="validate blue-grey darken-4" maxlength="30">
               <label for="username">Username</label>
-              <button class="btn" type="submit">Connect</button>
+              <button type="submit" class="btn">Connect</button>
             </form>
-          </div>
-          <div class="disconnect">
-            <button class="btn" id="disconnect">Disconnect</button>
-          </div>
+
+            <form class="disconnect">
+              <button class="btn">Disconnect</button>
+            </form>
+          </main>
         </section>
 
       </nav>
@@ -57,25 +60,23 @@
     <main id="main">
       <br>
 
-
-      <section id="chat">
+      <section class="chat">
         <h3>Chat</h3>
         <form class="input-field">
-          <input placeholder="" id="send-message" type="text" class="validate blue-grey darken-4">
-          <button class="btn" type="submit">Send</button>
+          <input type="text" class="validate blue-grey darken-4">
+          <button type="submit" class="btn">Send</button>
         </form>
 
-        <div id="chatbox" class="blue-grey darken-1">
+        <div class="chatbox blue-grey darken-1">
           <h3></h3>
-          <ul></ul>
+          <ul class="collection"></ul>
         </div>
       </section>
       <br>
 
-
-      <div id="announce">
+      <div class="announce">
         <h5>log:</h5>
-        <ul></ul>
+        <ul class="collection"></ul>
       </div>
       <br>
 

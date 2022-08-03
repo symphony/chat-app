@@ -4,13 +4,13 @@ $(() => {
   // create main socket ie. not logged in
   const mainSocket = createSocket('/');
   let userSocket = mainSocket;
-  const $mainHeader = $('body > header');
-  const $chatform = $('body main #chat form')
+  const $login = $('#header .login');
 
   // = events =
-  $mainHeader.find('#connect').on('submit', (e) => {
+  $login.find('.connect form').on('submit', (e) => {
     e.preventDefault();
-    const $input = $mainHeader.find('input');
+    const $this = $(e.currentTarget);
+    const $input = $this.find('input');
     const username = $input?.val()?.toString().trim();
 
     // form validation
@@ -22,16 +22,17 @@ $(() => {
     userSocket = connect({ username });
   });
 
-  $('#main-header .disconnect').on('click', () => {
+  $('#header .disconnect button').on('click', () => {
     if (!userSocket) return;
     disconnect(userSocket);
     userSocket = mainSocket;
-    $mainHeader.find('h1').text('Please Login');
+    $login.find('h2').text('Please Login');
   });
 
-  $chatform.on('submit', (e) => {
+  $('#main .chat form').on('submit', (e) => {
     e.preventDefault();
-    const $input = $chatform.find('input');
+    const $this = $(e.currentTarget);
+    const $input = $this.find('input');
     const message = $input?.val()?.toString().trim();
 
     // form validation
@@ -47,7 +48,7 @@ $(() => {
 const createSocket = (url: string, options?: ServerOptions): Server => io(options);
 
 // = functions =
-const connect = (data: {username: string}) => {
+const connect = (data: { username: string }) => {
   const socket = createSocket('/users');
 
   socket.on('connect', () => {
@@ -60,26 +61,27 @@ const connect = (data: {username: string}) => {
   socket.on('announce', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $('#announce > ul').prepend($li);
+    $('#main .announce > ul').prepend($li);
   });
 
   socket.on('notify', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
-    $('header .notify > ul').html($div);
+    $('#header .notify > ul').html($div);
   });
 
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('right')
-    $('#chat .chatbox ul').append($li);
+    $li.classList.add('collection-item right')
+    $('#main .chat .chatbox ul').append($li);
   });
 
   socket.on('incoming', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $('#chat .chatbox ul').append($li);
+    $li.classList.add('collection-item')
+    $('#main .chat .chatbox ul').append($li);
   });
 
   return socket;
@@ -92,7 +94,6 @@ const disconnect = (socket: Socket) => {
 
 
 const updateHeader = (text: string) => {
-  const $mainHeader = $('header')
-  $mainHeader.find('h1').html(document.createTextNode(text));
+  $('.login header:first-child').html(document.createTextNode(text));
 };
 

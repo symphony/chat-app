@@ -3,19 +3,26 @@ body {
   color: $light1;
   font-size: 2rem;
 
-  header {
-    h1 {
-      min-width: 40rem;
-      word-break: keep-all;
-    }
-
-    // display: flex;
-    justify-content: space-between;
-  }
-
-  main, > header {
+  #header, #main {
     width: 95%;
     margin: auto;
+  }
+
+  #header .login {
+    display: flex;
+    justify-content: space-between;
+
+    header {
+      min-width: 40rem;
+    }
+
+    main, .connect {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   form {
@@ -35,16 +42,5 @@ body {
 
   button {
     @include font-scale;
-
-    background-color: $dark1;
-    color: $light1;
-    text-align: right;
-
-    &#disconnect {
-      margin-left: 50rem;
-    }
   }
-
-
-
 }
