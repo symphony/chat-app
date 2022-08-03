@@ -29,7 +29,7 @@ $(() => {
 
 // functions
 const connect = (data: User) => {
-  // @ts-ignore // this line breaks compiler because it can't find 'io' from window even though it's there
+  // @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
   const socket = io();
 
   socket.on('connect', () => {

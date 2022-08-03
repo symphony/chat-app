@@ -1,5 +1,5 @@
 // = modules =
-// @ts-ignore - error is resolved but still shows
+// @ts-ignore // visual bug - error is resolved in tsconfig
 import express from 'express';
 import * as socketServer from './socketServer.js';
 
