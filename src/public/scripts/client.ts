@@ -3,6 +3,7 @@ import { Socket } from 'socket.io'; // types
 $(() => {
   let socket: null | Socket = null;
   const $mainHeader = $('body > header');
+  updateHeader($mainHeader);
 
   // = events =
   $mainHeader.find('#connect').on('submit', (e) => {
@@ -14,8 +15,6 @@ $(() => {
     if (socket || !username) return;
 
     $form.val('');
-
-    $mainHeader.find('h1').html(document.createTextNode(`Hello, ${username}!`));
     socket = connect({ username });
   });
 
@@ -33,8 +32,10 @@ const connect = (data: User) => {
   const socket = io();
 
   socket.on('connect', () => {
-    socket.emit('name', data);
-    console.log('Joined as:', data.username);
+    socket.emit('name', data, (e: Error, message: string) => {
+      if (e) return console.error(e);
+      // updateHeader(`Hello, ${message}!`);
+    });
   });
 
   socket.on('announce', (data: string) => {
@@ -56,3 +57,9 @@ const disconnect = (socket: Socket) => {
   console.log('Disconnected from server\n');
   socket.disconnect();
 };
+
+
+const updateHeader = (($mainHeader: JQuery<HTMLElement>) => (text: string) => {
+  $mainHeader.find('h1').html(document.createTextNode(text));
+});
+
