@@ -1,7 +1,12 @@
 // = types =
 import * as $ from 'jquery';
+import * as io from "socket.io-client";
 import { Socket } from 'socket.io';
 
+interface User {
+  username: string;
+
+}
 $(() => {
   let socket: null | Socket = null;
   const $mainHeader = $('body > header');
@@ -31,7 +36,7 @@ $(() => {
 
 // functions
 const connect = (data: User) => {
-  const socket = io('/');
+  const socket = io();
 
   socket.on('connect', () => {
     socket.emit('name', data);
