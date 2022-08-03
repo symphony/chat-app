@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Chatting App to demonstrate Socket.io library",
   "main": "server.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && tsc && npm run copy-files && npm run sass",
+    "clean": "rm -rf ./dist",
+    "copy-files": "cp -rv src/public/index.html dist/public/index.html",
+    "sass": "sass src/styles/index.scss:dist/public/styles/index.css",
+    "start": "node dist/index.js",
+    "dev": "npm run build && concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
   "author": "",
@@ -16,7 +19,10 @@
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.19"
+    "@types/jquery": "^3.5.14",
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19",
+    "sass": "^1.54.1",
+    "typescript": "^4.7.4"
   }
 }

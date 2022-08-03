@@ -1,5 +1,7 @@
 import * as socketio from 'socket.io';
 
+const onlineUsers = new Map();
+
 export const listen = (httpServer) => {
   const server = new socketio.Server(httpServer);
 

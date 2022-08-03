@@ -1,15 +1,19 @@
 $(() => {
   let socket = null;
+  const $mainHeader = $('body > header');
 
   // = events =
-  $('body > header > #connect').on('submit', function(e) {
+  $mainHeader.find('#connect').on('submit', (e) => {
     e.preventDefault();
-
-    $form = $(this).find('input');
+    $form = $mainHeader.find('input');
     const username = $form.val().trim();
+
+    // form validation
     if (socket || !username) return;
+
     $form.val('');
 
+    $mainHeader.find('h1').html(document.createTextNode(`Hello, ${username}!`));
     socket = connect({ username });
   });
 
@@ -17,12 +21,13 @@ $(() => {
     if (!socket) return;
     disconnect(socket);
     socket = null;
+    $mainHeader.find('h1').text('Please Login');
   });
 });
 
 // functions
 const connect = (data) => {
-  const socket = io(data);
+  const socket = io();
 
   socket.on('connect', (e) => {
     socket.emit('name', data);
