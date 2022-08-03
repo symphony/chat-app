@@ -1,7 +1,7 @@
 // = globally available types =
 declare global {
   interface User {
-    id?: string;
+    id: string;
     username: string;
   }
 }

@@ -47,7 +47,7 @@ $(() => {
 const createSocket = (url: string, options?: ServerOptions): Server => io(options);
 
 // = functions =
-const connect = (data: User) => {
+const connect = (data: {username: string}) => {
   const socket = createSocket('/users');
 
   socket.on('connect', () => {

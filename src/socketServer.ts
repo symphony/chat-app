@@ -8,10 +8,18 @@ const removeSymbols = (s: string) => {
   return s.replace(reg, '');
 };
 
+// removes bad words
 const scrub = (s: string) => {
   const r1: [RegExp, string] = [/n+[\s_\.\-]?[i1l|]+[\s_\.\-]?[gq]+[_\.\-\s]*[gq69]+[e3a4i\s]*[ra4s]*s?/ig, '****'];
   const r2: [RegExp, string] = [/(f|ph)?[\s_\.\-]?[a4]+.?[gq69]+[_\.\-\s]*[gq69]+[o0\s]+[t7]*s?/ig, '****'];
   return s.replace(...r1).replace(...r2);
+};
+
+// = socket functions =
+const emitOnlineUsers = (id?: string) => {
+  // TODO: emit
+  console.log('users:', Object.values(onlineUsers));
+  console.log('users:', Object.values(onlineUsers));
 };
 
 // = local data =
@@ -28,10 +36,11 @@ export const listen = (httpServer: Server) => {
     console.log(id, 'connected');
 
 
-    client.on('login', (data: User, callback) => {
+    client.on('login', (data: { username: string }, callback) => {
       username = scrub(removeSymbols(data.username));
       onlineUsers[id] = { id, username };
 
+      server.except(id).emit('announce', username + ' is online');
       emitOnlineUsers();
       callback(null, username);
     });
@@ -51,8 +60,6 @@ export const listen = (httpServer: Server) => {
     // Client Message
     // server.to(id).emit('notify', 'Your ID is: ' + id);
 
-    // Broadcast Message
-    server.except(id).emit('announce', username + ' is online');
     emitOnlineUsers(id);
   });
 
@@ -60,7 +67,4 @@ export const listen = (httpServer: Server) => {
 };
 
 
-function emitOnlineUsers(id?: string) {
-  console.log('Users:', Object.values(onlineUsers).map(({ username }) => username));
-}
 
