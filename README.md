@@ -5,4 +5,4 @@ Chatting App built with TypeScript, Express and Socket.io
 Clone the repo
 
 - use `npm run dev` to start the server
-- visit [`https://localhost:3000`](https://localhost:3000) in your browser
+- visit [`http://localhost:3000`](http://localhost:3000) in your browser
