@@ -1,5 +1,5 @@
-import { Server } from 'http'; // types
 import * as socketio from 'socket.io';
+import { Server } from 'http'; // types
 
 const onlineUsers = new Map();
 

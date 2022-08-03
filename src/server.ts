@@ -1,4 +1,5 @@
 // = modules =
+// @ts-ignore - error is resolved but still shows
 import express from 'express';
 import * as socketServer from './socketServer.js';
 
@@ -8,9 +9,10 @@ const app = express();
 
 app.use(express.static('dist/public'));
 
-const httpServer = app.listen(PORT, () => {
+// start http server
+const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });
 
 // start socket server
-const io = socketServer.listen(httpServer);
+socketServer.listen(server);

@@ -1,6 +1,4 @@
-// = types =
-import $ from "jquery";
-import { Socket } from 'socket.io';
+import { Socket } from 'socket.io'; // types
 
 $(() => {
   let socket: null | Socket = null;
@@ -31,6 +29,7 @@ $(() => {
 
 // functions
 const connect = (data: User) => {
+  // @ts-ignore // this line breaks compiler because it can't find 'io' from window even though it's there
   const socket = io();
 
   socket.on('connect', () => {
