@@ -15,7 +15,7 @@ const scrub = (s: string) => {
 };
 
 // = local data =
-const onlineUsers = new Map();
+const onlineUsers: { [id: string]: User } = {};
 
 // = main function =
 export const listen = (httpServer: Server) => {
@@ -30,15 +30,16 @@ export const listen = (httpServer: Server) => {
 
     client.on('login', (data: User, callback) => {
       username = scrub(removeSymbols(data.username));
-      onlineUsers.set(id, { id, username });
+      onlineUsers[id] = { id, username };
 
-      console.log('Users:', onlineUsers.values);
+      emitOnlineUsers();
       callback(null, username);
     });
 
     client.on('disconnect', () => {
-      onlineUsers.delete(id);
+      delete onlineUsers[id];
       console.log(id, 'disconnected');
+      emitOnlineUsers();
     });
 
     client.on('send', (body: string) => {
@@ -52,10 +53,14 @@ export const listen = (httpServer: Server) => {
 
     // Broadcast Message
     server.except(id).emit('announce', username + ' is online');
-    server.emit('online-users', onlineUsers.values)
+    emitOnlineUsers(id);
   });
 
   return server;
 };
 
+
+function emitOnlineUsers(id?: string) {
+  console.log('Users:', Object.values(onlineUsers).map(({ username }) => username));
+}
 
