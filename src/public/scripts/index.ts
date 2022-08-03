@@ -1,6 +1,5 @@
 // = types =
-import * as $ from 'jquery';
-import * as io from "socket.io-client";
+import $ from "jquery";
 import { Socket } from 'socket.io';
 
 $(() => {

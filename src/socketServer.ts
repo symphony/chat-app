@@ -6,11 +6,11 @@ const onlineUsers = new Map();
 export const listen = (httpServer: Server) => {
   const server = new socketio.Server(httpServer);
 
-  server.on('connection', (client) => {
+  server.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username = null;
 
-    client.on('name', (data) => {
+    client.on('name', (data: User) => {
       username = data.username;
       server.except(id).emit('announce', username + ' is online');
     });

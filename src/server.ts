@@ -1,12 +1,12 @@
 // = modules =
-import * as express from 'express';
+import express from 'express';
 import * as socketServer from './socketServer.js';
 
 // = server config =
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('dist/public'));
 
 const httpServer = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);

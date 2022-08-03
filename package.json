@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Chatting App to demonstrate Socket.io library",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "build": "npm run clean && npm run sass && tsc && npm run copy-files",
     "clean": "rm -rf ./dist",
