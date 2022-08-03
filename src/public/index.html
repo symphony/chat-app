@@ -30,25 +30,43 @@
   <body>
     <header>
       <h1>Please Login</h1>
-      <form action="/" id="connect">
+      <div id="notify">
+        <h3></h3>
+        <ul></ul>
+      </div>
+      <form id="connect">
         <input type="text" name="username" />
         <button type="submit">Connect</button>
       </form>
       <button id="disconnect">Disconnect</button>
+      <br>
     </header>
 
     <main>
       <br>
-      <div id="notify">
-        <h3>Server:</h3>
-        <ul></ul>
-      </div>
+
+
+      <section id="chat">
+        <h3>Chat</h3>
+        <form>
+          <input type="text" name="message" />
+          <button type="submit">Send</button>
+        </form>
+
+        <div id="chatbox">
+          <h3></h3>
+          <ul></ul>
+        </div>
+      </section>
       <br>
+
+
       <div id="announce">
-        <h3>log:</h3>
+        <h5>log:</h5>
         <ul></ul>
       </div>
       <br>
+
     </main>
   </body>
 

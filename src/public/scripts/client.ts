@@ -3,18 +3,18 @@ import { Socket } from 'socket.io'; // types
 $(() => {
   let socket: null | Socket = null;
   const $mainHeader = $('body > header');
-  updateHeader($mainHeader);
+  const $chatform = $('body main #chat form')
 
   // = events =
   $mainHeader.find('#connect').on('submit', (e) => {
     e.preventDefault();
-    const $form = $mainHeader.find('input');
-    const username = $form?.val()?.toString().trim();
+    const $input = $mainHeader.find('input');
+    const username = $input?.val()?.toString().trim();
 
     // form validation
     if (socket || !username) return;
 
-    $form.val('');
+    $input.val('');
     socket = connect({ username });
   });
 
@@ -24,6 +24,18 @@ $(() => {
     socket = null;
     $mainHeader.find('h1').text('Please Login');
   });
+
+  $chatform.on('submit', (e) => {
+    e.preventDefault();
+    const $input = $mainHeader.find('input');
+    const message = $input?.val()?.toString().trim();
+
+    // form validation
+    if (!socket || !message) return;
+
+    $input.val('');
+    socket.emit('send', { body: message });
+  });
 });
 
 // functions
@@ -32,9 +44,9 @@ const connect = (data: User) => {
   const socket = io();
 
   socket.on('connect', () => {
-    socket.emit('name', data, (e: Error, message: string) => {
+    socket.emit('name', data, (e: Error | null, message: string) => {
       if (e) return console.error(e);
-      // updateHeader(`Hello, ${message}!`);
+      updateHeader(`Hello, ${message}!`);
     });
   });
 
@@ -47,7 +59,13 @@ const connect = (data: User) => {
   socket.on('notify', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
-    $('body > main > #notify > ul').html($div);
+    $('body > header > #notify > ul').html($div);
+  });
+
+  socket.on('chat', (data: string) => {
+    const $div = document.createElement('div');
+    $div.appendChild(document.createTextNode(data));
+    $('body > main > section#chat #chatbox ul').html($div);
   });
 
   return socket;
@@ -59,7 +77,8 @@ const disconnect = (socket: Socket) => {
 };
 
 
-const updateHeader = (($mainHeader: JQuery<HTMLElement>) => (text: string) => {
+const updateHeader = (text: string) => {
+  const $mainHeader = $('header')
   $mainHeader.find('h1').html(document.createTextNode(text));
-});
+};
 
