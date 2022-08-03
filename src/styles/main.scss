@@ -21,10 +21,13 @@ body {
 
   main #chat #chatbox {
     @include font-scale;
+    margin: 4rem 0;
+    padding: 0.1em 1em;
+    border-radius: $radius;
     color: aqua;
     background-color: rgb(90, 111, 119);
-    min-height: 20rem;
-    max-width: 30rem;
+    min-height: 30rem;
+    max-width: 40rem;
 
     .right {
       text-align: right;
