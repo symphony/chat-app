@@ -22,7 +22,7 @@ $(() => {
     userSocket = connect({ username });
   });
 
-  $('body > header > #disconnect').on('click', () => {
+  $('#main-header .disconnect').on('click', () => {
     if (!userSocket) return;
     disconnect(userSocket);
     userSocket = mainSocket;
@@ -60,26 +60,26 @@ const connect = (data: {username: string}) => {
   socket.on('announce', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $('body > main > #announce > ul').prepend($li);
+    $('#announce > ul').prepend($li);
   });
 
   socket.on('notify', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
-    $('body > header > #notify > ul').html($div);
+    $('header .notify > ul').html($div);
   });
 
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
     $li.classList.add('right')
-    $('body > main > section#chat #chatbox ul').append($li);
+    $('#chat .chatbox ul').append($li);
   });
 
   socket.on('incoming', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $('body > main > section#chat #chatbox ul').append($li);
+    $('#chat .chatbox ul').append($li);
   });
 
   return socket;

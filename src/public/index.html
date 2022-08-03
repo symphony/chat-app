@@ -28,24 +28,33 @@
   </head>
 
   <body>
-    <header>
-      <h1>Please Login</h1>
-      <div id="notify">
-        <h3></h3>
-        <ul></ul>
-      </div>
+    <header id="#header">
+      <nav>
 
+        <h1>Please Login</h1>
+        <div id="notify">
+          <h3></h3>
+          <ul></ul>
+        </div>
 
-      <form class="input-field" id="connect">
-        <input maxlength="30" placeholder="" id="username" type="text" class="validate blue-grey darken-4">
-        <label for="username">Username</label>
-        <button class="btn" type="submit">Connect</button>
-      </form>
-      <button class="btn" id="disconnect">Disconnect</button>
-      <br>
+        <section>
+          <div class="connect">
+            <form class="input-field">
+              <input maxlength="30" placeholder="" id="username" type="text" class="validate blue-grey darken-4">
+              <label for="username">Username</label>
+              <button class="btn" type="submit">Connect</button>
+            </form>
+          </div>
+          <div class="disconnect">
+            <button class="btn" id="disconnect">Disconnect</button>
+          </div>
+        </section>
+
+      </nav>
     </header>
+    <br>
 
-    <main>
+    <main id="main">
       <br>
 
 
@@ -71,6 +80,7 @@
       <br>
 
     </main>
+    <footer id="footer"></footer>
   </body>
 
 </html>
