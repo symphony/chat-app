@@ -1,8 +1,9 @@
+import { Server } from 'http'; // types
 import * as socketio from 'socket.io';
 
 const onlineUsers = new Map();
 
-export const listen = (httpServer) => {
+export const listen = (httpServer: Server) => {
   const server = new socketio.Server(httpServer);
 
   server.on('connection', (client) => {

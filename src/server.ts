@@ -1,6 +1,5 @@
-
 // = modules =
-import express from 'express';
+import * as express from 'express';
 import * as socketServer from './socketServer.js';
 
 // = server config =

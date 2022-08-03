@@ -1,12 +1,14 @@
+import { Socket } from 'socket.io';
+
 $(() => {
-  let socket = null;
+  let socket: null | Socket = null;
   const $mainHeader = $('body > header');
 
   // = events =
   $mainHeader.find('#connect').on('submit', (e) => {
     e.preventDefault();
-    $form = $mainHeader.find('input');
-    const username = $form.val().trim();
+    const $form = $mainHeader.find('input');
+    const username = $form?.val()?.toString().trim();
 
     // form validation
     if (socket || !username) return;
@@ -26,22 +28,22 @@ $(() => {
 });
 
 // functions
-const connect = (data) => {
+const connect = (data: User) => {
   const socket = io();
 
-  socket.on('connect', (e) => {
+  socket.on('connect', () => {
     socket.emit('name', data);
     console.log('Joined as:', data.username);
   });
 
-  socket.on('announce', (data) => {
-    $li = document.createElement('li');
+  socket.on('announce', (data: string) => {
+    const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
     $('body > main > #announce > ul').prepend($li);
   });
 
-  socket.on('notify', (data) => {
-    $div = document.createElement('div');
+  socket.on('notify', (data: string) => {
+    const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
     $('body > main > #notify > ul').html($div);
   });
@@ -49,7 +51,7 @@ const connect = (data) => {
   return socket;
 };
 
-const disconnect = (socket) => {
+const disconnect = (socket: Socket) => {
   console.log('Disconnected from server\n');
   socket.disconnect();
 };
