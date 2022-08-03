@@ -1,3 +1,5 @@
+// = types =
+import * as $ from 'jquery';
 import { Socket } from 'socket.io';
 
 $(() => {
@@ -29,7 +31,7 @@ $(() => {
 
 // functions
 const connect = (data: User) => {
-  const socket = io();
+  const socket = io('/');
 
   socket.on('connect', () => {
     socket.emit('name', data);
