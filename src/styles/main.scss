@@ -1,8 +1,20 @@
 body {
-  background-color: $dark1;
+  background-color: $darkest;
   color: $light1;
   font-size: 2rem;
 
+  header {
+    h1 {
+      min-width: 40rem;
+      word-break: keep-all;
+    }
+    // display: flex;
+    justify-content: space-between;
+  }
+
+  main {
+    // display: flex;
+  }
 
   main, > header {
     width: 95%;
@@ -10,12 +22,29 @@ body {
   }
 
   form {
-    font-size: 1rem;
+    @include font-scale;
 
-    input, button {
-      font-size: 2em !important;
+    font-size: 1rem;
+    margin: 2rem 0;
+
+    input {
       @include font-scale;
-      max-width: 12rem;
+      font-size: 2em !important;
+      min-width: 12rem;
+      max-width: 30rem;
+      color: $light1;
+    }
+  }
+
+  button {
+    @include font-scale;
+
+    background-color: $dark1;
+    color: $light1;
+    text-align: right;
+
+    &#disconnect {
+      margin-left: 50rem;
     }
   }
 
