@@ -66,16 +66,16 @@ const connect = (data: User) => {
   });
 
   socket.on('outgoing', (data: string) => {
-    const $div = document.createElement('div');
-    $div.appendChild(document.createTextNode(data));
-    $div.classList.add('right')
-    $('body > main > section#chat #chatbox ul').append($div);
+    const $li = document.createElement('li');
+    $li.appendChild(document.createTextNode(data));
+    $li.classList.add('right')
+    $('body > main > section#chat #chatbox ul').append($li);
   });
 
   socket.on('incoming', (data: string) => {
-    const $div = document.createElement('div');
-    $div.appendChild(document.createTextNode(data));
-    $('body > main > section#chat #chatbox ul').append($div);
+    const $li = document.createElement('li');
+    $li.appendChild(document.createTextNode(data));
+    $('body > main > section#chat #chatbox ul').append($li);
   });
 
   return socket;
