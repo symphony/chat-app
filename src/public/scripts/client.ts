@@ -1,7 +1,8 @@
 import { Socket } from 'socket.io'; // types
 
 $(() => {
-  let socket: null | Socket = null;
+  // @ts-ignore
+  let socket: null | Socket = io();
   const $mainHeader = $('body > header');
   const $chatform = $('body main #chat form')
 
@@ -12,9 +13,11 @@ $(() => {
     const username = $input?.val()?.toString().trim();
 
     // form validation
-    if (socket || !username) return;
+    if (!username) return;
 
     $input.val('');
+
+    if (socket) socket.disconnect();
     socket = connect({ username });
   });
 
@@ -44,7 +47,7 @@ const connect = (data: User) => {
   const socket = io();
 
   socket.on('connect', () => {
-    socket.emit('name', data, (e: Error | null, message: string) => {
+    socket.emit('login', data, (e: Error | null, message: string) => {
       if (e) return console.error(e);
       updateHeader(`Hello, ${message}!`);
     });
@@ -62,7 +65,14 @@ const connect = (data: User) => {
     $('body > header > #notify > ul').html($div);
   });
 
-  socket.on('chat', (data: string) => {
+  socket.on('outgoing', (data: string) => {
+    const $div = document.createElement('div');
+    $div.appendChild(document.createTextNode(data));
+    $div.classList.add('right')
+    $('body > main > section#chat #chatbox ul').append($div);
+  });
+
+  socket.on('incoming', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
     $('body > main > section#chat #chatbox ul').append($div);

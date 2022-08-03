@@ -15,7 +15,7 @@ export const listen = (httpServer: Server) => {
     const id = client.id;
     let username: string | null = null;
 
-    client.on('name', (data: User, callback) => {
+    client.on('login', (data: User, callback) => {
       username = c(data.username.replace(...r1));
       onlineUsers.set(id, { id, username })
 
@@ -29,7 +29,8 @@ export const listen = (httpServer: Server) => {
     });
 
     client.on('send', (body: string) => {
-      server.emit('chat', `[${username}] ${c(body)}`)
+      server.to(id).emit('outgoing', `${c(body)} [${username}]`)
+      server.except(id).emit('incoming', `[${username}] ${c(body)}`)
     });
 
     // Client Message

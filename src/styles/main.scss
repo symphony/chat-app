@@ -1,3 +1,33 @@
-input {
-  max-width: 12em;
+body {
+  background-color: $dark1;
+  color: $light1;
+  font-size: 2rem;
+
+
+  main, > header {
+    width: 95%;
+    margin: auto;
+  }
+
+  form {
+    font-size: 1rem;
+
+    input, button {
+      font-size: 2em !important;
+      @include font-scale;
+      max-width: 12rem;
+    }
+  }
+
+  main #chat #chatbox {
+    @include font-scale;
+    color: aqua;
+    background-color: rgb(90, 111, 119);
+    min-height: 20rem;
+    max-width: 30rem;
+
+    .right {
+      text-align: right;
+    }
+  }
 }
