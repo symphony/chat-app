@@ -8,8 +8,8 @@
     "clean": "rm -rf ./dist",
     "copy-files": "cp -rv src/public/index.html dist/public/index.html",
     "sass": "sass src/styles/index.scss:dist/public/styles/index.css",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "start": "node dist/server.js",
+    "dev": "concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
   "keywords": [],
   "author": "",
