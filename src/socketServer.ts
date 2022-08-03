@@ -25,12 +25,14 @@ export const listen = (httpServer: Server) => {
   server.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
+    console.log(id, 'connected');
+
 
     client.on('login', (data: User, callback) => {
       username = scrub(removeSymbols(data.username));
       onlineUsers.set(id, { id, username });
 
-      console.log('Users:', onlineUsers);
+      console.log('Users:', onlineUsers.values);
       callback(null, username);
     });
 
@@ -50,6 +52,7 @@ export const listen = (httpServer: Server) => {
 
     // Broadcast Message
     server.except(id).emit('announce', username + ' is online');
+    server.emit('online-users', onlineUsers.values)
   });
 
   return server;
