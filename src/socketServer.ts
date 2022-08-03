@@ -34,7 +34,7 @@ export const listen = (httpServer: Server) => {
     });
 
     // Client Message
-    server.to(id).emit('notify', 'Your ID is: ' + id);
+    // server.to(id).emit('notify', 'Your ID is: ' + id);
 
     // Broadcast Message
     server.except(id).emit('announce', username + ' is online');
