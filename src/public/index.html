@@ -36,8 +36,9 @@
       </div>
 
 
-      <form id="connect">
-        <input type="text" name="username" />
+      <form class="input-field" id="connect">
+        <input maxlength="30" placeholder="Pepperoni" id="username" type="text" class="validate">
+        <label for="username">Username</label>
         <button class="btn" type="submit">Connect</button>
       </form>
       <button class="btn" id="disconnect">Disconnect</button>
@@ -50,8 +51,8 @@
 
       <section id="chat">
         <h3>Chat</h3>
-        <form>
-          <input type="text" name="message" />
+        <form class="input-field">
+          <input placeholder="" id="send-message" type="text" class="validate">
           <button class="btn" type="submit">Send</button>
         </form>
 

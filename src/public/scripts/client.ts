@@ -1,8 +1,9 @@
-import { Socket } from 'socket.io'; // types
+import { Socket, ServerOptions } from 'socket.io'; // types
 
 $(() => {
-  // @ts-ignore
-  let socket: null | Socket = io();
+  // create main socket ie. not logged in
+  const mainSocket = createSocket('/');
+  let userSocket = mainSocket;
   const $mainHeader = $('body > header');
   const $chatform = $('body main #chat form')
 
@@ -17,14 +18,14 @@ $(() => {
 
     $input.val('');
 
-    if (socket) socket.disconnect();
-    socket = connect({ username });
+    if (userSocket) userSocket.disconnect();
+    userSocket = connect({ username });
   });
 
   $('body > header > #disconnect').on('click', () => {
-    if (!socket) return;
-    disconnect(socket);
-    socket = null;
+    if (!userSocket) return;
+    disconnect(userSocket);
+    userSocket = mainSocket;
     $mainHeader.find('h1').text('Please Login');
   });
 
@@ -34,17 +35,20 @@ $(() => {
     const message = $input?.val()?.toString().trim();
 
     // form validation
-    if (!socket || !message) return;
+    if (!userSocket || !message) return;
 
     $input.val('');
-    socket.emit('send', message);
+    userSocket.emit('send', message);
   });
 });
 
-// functions
+// = helpers =
+// @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
+const createSocket = (url: string, options?: ServerOptions): Server => io(options);
+
+// = functions =
 const connect = (data: User) => {
-  // @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
-  const socket = io();
+  const socket = createSocket('/users');
 
   socket.on('connect', () => {
     socket.emit('login', data, (e: Error | null, message: string) => {
