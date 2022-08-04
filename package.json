@@ -9,7 +9,7 @@
     "clean": "rm -rf ./dist",
     "remove-ts": "find ./dist -name \"*.ts\" -type f -print0 | xargs -0 /bin/rm -f",
     "copy-files": "cp -rv ./src/public ./dist",
-    "sass": "sass ./src/styles/index.scss:./dist/public/css/index.css",
+    "sass": "sass ./src/styles/index.scss:./dist/public/styles/index.css",
     "start": "node dist/server.js",
     "dev": "npm run build && concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
@@ -18,7 +18,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
-    "materialize-css": "^1.0.0-rc.2",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1"
   },
