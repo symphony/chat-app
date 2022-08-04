@@ -1,15 +1,15 @@
 # Chat App
-Chatting App built with TypeScript, Materialize, Express and Socket.io
+Chatting App built with TypeScript, Materialize-css, Express and Socket.io
 
 ## Live Demo
 https://chat-app-2341.herokuapp.com/
 
 ## Features
-- Realtime Chatting
+- Realtime chatting
 - Custom usernames
 
 ## Prototype
-![initial functionality of app navbar, greeting, chatbox, online userlist](_/docs/01-prototype.png)
+<img alt="initial functionality of app: navbar, greeting, chatbox, online userlist" src="_docs/01-prototype.png?raw=true" width="800" name="Dashboard" ></img>
 
 ## For Devs - Usage
 - Clone the repo \
