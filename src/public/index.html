@@ -28,7 +28,7 @@
 
       <main class="row container nav-wrapper valign-wrapper">
         <header class="col s8">
-          <h2>Please Login</h2>
+          <h4>Please Login</h4>
         </header>
 
         <section class="col s4 login valign-wrapper">
@@ -53,23 +53,30 @@
 
   <main id="main" class="container">
     <header>
-      <div id="notify" class="row">
-        <h3></h3>
+      <div id="alert" class="row">
+        <header>
+          <h4></h4>
+        </header>
         <ul class="collection"></ul>
       </div>
     </header>
 
-    <section class="row chat col s7">
-      <h3>Chat</h3>
-      <form class="row input-field col s7">
-        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4 col s10">
+    <section class="col chat">
+      <header class="row">
+        <h4>Chat</h4>
+      </header>
+
+      <form class="row input-field">
+        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4 col s6">
         <button type="submit" class="btn waves-effect col s2">Send<i
             class="material-icons left blue-grey-text text-darken-2">textsms</i></button>
       </form>
 
-      <div class="row chatbox blue-grey darken-1 col s7">
-        <h3></h3>
-        <ul class="collection blue-grey darken-1"></ul>
+      <div class="row chatbox blue-grey darken-1 col s6">
+        <header>
+          <h4></h4>
+        </header>
+        <ul class="row collection blue-grey darken-1 col s6"></ul>
       </div>
     </section>
     <br>
