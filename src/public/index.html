@@ -23,63 +23,65 @@
 </head>
 
 <body class="grey darken-4 white-text text-darken-1 flow-text">
-  <div class="container">
 
-    <header id="header">
-      <nav>
+  <header id="header">
+    <nav class="nav-wrapper">
 
-        <section class="nav-wrapper row">
-          <header class="nav  col s6 login">
-            <h2>Please Login</h2>
-            <div id="notify">
-              <h3></h3>
-              <ul class="collection"></ul>
-            </div>
-          </header>
+      <section class="row container">
+        <header class="nav  col s6">
+          <h2>Please Login</h2>
+        </header>
 
-          <main class="nav col s6 ">
-            <form class="row connect">
-              <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3" maxlength="30">
-              <label for="username">Username</label>
-              <button type="submit" class="col s3 btn waves-effect">Connect</button>
-            </form>
+        <main class="nav col s6 login">
+          <!-- hide when logged in -->
+          <form class="row connect">
+            <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
+              maxlength="30">
+            <label for="username">Username</label>
+            <button type="submit" class="col s3 btn waves-effect">Connect</button>
+          </form>
 
-            <form class="disconnect">
-              <button type="button" class="btn waves-effect disabled">Disconnect</button>
-            </form>
-          </main>
-        </section>
+          <!-- hide when not logged in -->
+          <form class="disconnect">
+            <button type="button" class="btn waves-effect disabled">Disconnect</button>
+          </form>
 
-      </nav>
-    </header>
+        </main>
+      </section>
+
+    </nav>
+  </header>
+  <br>
+
+  <main id="main" class="container">
+    <div id="notify">
+      <h3></h3>
+      <ul class="collection"></ul>
+    </div>
+
+    <section class="chat">
+      <h3>Chat</h3>
+      <form class="input-field">
+        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4">
+        <button type="submit" class="btn waves-effect">Send<i
+            class="material-icons left blue-grey-text text-darken-3">textsms</i></button>
+      </form>
+
+      <div class="chatbox blue-grey darken-1">
+        <h3></h3>
+        <ul class="collection blue-grey darken-1"></ul>
+      </div>
+    </section>
     <br>
 
-    <main id="main">
-      <br>
+    <div class="announce">
+      <h5>log:</h5>
+      <ul class="collection"></ul>
+    </div>
+    <br>
 
-      <section class="chat">
-        <h3>Chat</h3>
-        <form class="input-field">
-          <input type="text" class="validate blue-grey darken-4 white-text text-accent-4">
-          <button type="submit" class="btn waves-effect">Send<i class="material-icons left blue-grey-text text-darken-3">textsms</i></button>
-        </form>
-
-        <div class="chatbox blue-grey darken-1">
-          <h3></h3>
-          <ul class="collection blue-grey darken-1"></ul>
-        </div>
-      </section>
-      <br>
-
-      <div class="announce">
-        <h5>log:</h5>
-        <ul class="collection"></ul>
-      </div>
-      <br>
-
-    </main>
-    <footer id="footer"></footer>
-  </div>
+  </main>
+  <footer id="footer"></footer>
 </body>
 
 </html>

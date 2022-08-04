@@ -95,6 +95,6 @@ const disconnect = (socket: Socket) => {
 
 
 const updateHeader = (text: string) => {
-  $('.login header h2').html(document.createTextNode(text));
+  $('#header header h2').html(document.createTextNode(text));
 };
 
