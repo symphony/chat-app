@@ -16,10 +16,12 @@ const scrub = (s: string) => {
 };
 
 // = socket functions =
-const emitOnlineUsers = (id?: string) => {
-  // TODO: emit
+const emitOnlineUsers = (socket: socketio.Socket, id?: string) => {
   console.log('users:', Object.values(onlineUsers));
-  console.log('users:', Object.values(onlineUsers));
+  (id
+    ? socket.to(id)
+    : socket)
+    .emit('users:', { ...onlineUsers });
 };
 
 // = local data =
@@ -27,10 +29,10 @@ const onlineUsers: { [id: string]: User } = {};
 
 // = main function =
 export const listen = (httpServer: Server) => {
-  const server = new socketio.Server(httpServer);
+  const socket = new socketio.Server(httpServer);
 
   // client connects
-  server.on('connection', (client: socketio.Socket) => {
+  socket.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
     console.log(id, 'connected');
@@ -40,30 +42,30 @@ export const listen = (httpServer: Server) => {
       username = scrub(removeSymbols(data.username));
       onlineUsers[id] = { id, username };
 
-      server.except(id).emit('announce', username + ' is online');
-      emitOnlineUsers();
+      socket.except(id).emit('announce', username + ' is online');
+      emitOnlineUsers(socket);
       callback(null, username);
     });
 
     client.on('disconnect', () => {
-      delete onlineUsers[id];
       console.log(id, 'disconnected');
-      emitOnlineUsers();
+      delete onlineUsers[id];
+      emitOnlineUsers(socket);
     });
 
     client.on('send', (body: string) => {
       const message = scrub(body.trim());
-      server.to(id).emit('outgoing', `${message} [${username}]`)
-      server.except(id).emit('incoming', `[${username}] ${message}`)
+      socket.to(id).emit('outgoing', `${message} [${username}]`)
+      socket.except(id).emit('incoming', `[${username}] ${message}`)
     });
 
     // Client Message
     // server.to(id).emit('alert', 'Your ID is: ' + id);
 
-    emitOnlineUsers(id);
+    emitOnlineUsers(socket, id);
   });
 
-  return server;
+  return socket;
 };
 
 
