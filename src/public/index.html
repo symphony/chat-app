@@ -23,16 +23,15 @@
 </head>
 
 <body class="grey darken-4 white-text text-darken-1 flow-text">
-
   <header id="header" class="">
     <nav class="">
 
-      <section class="row container nav-wrapper valign-wrapper">
+      <main class="row container nav-wrapper valign-wrapper">
         <header class="col s8">
           <h2>Please Login</h2>
         </header>
 
-        <main class="col s4 login valign-wrapper">
+        <section class="col s4 login valign-wrapper">
           <!-- hide when logged in -->
           <form class="connect input-field row valign-wrapper col s12">
             <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
@@ -46,18 +45,19 @@
             <button type="button" class="col s4 btn waves-effect">Disconnect</button>
           </form>
 
-        </main>
-      </section>
+        </section>
+      </main>
 
     </nav>
   </header>
 
-
   <main id="main" class="container">
-    <div id="notify" class="row">
-      <h3></h3>
-      <ul class="collection"></ul>
-    </div>
+    <header>
+      <div id="notify" class="row">
+        <h3></h3>
+        <ul class="collection"></ul>
+      </div>
+    </header>
 
     <section class="row chat col s6">
       <h3>Chat</h3>
