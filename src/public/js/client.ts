@@ -62,7 +62,7 @@ const connect = (data: { username: string }) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
     $li.classList.add('collection-item');
-    $('#main .announce > ul').prepend($li);
+    $('#footer .announce > ul').prepend($li);
   });
 
   socket.on('notify', (data: string) => {
