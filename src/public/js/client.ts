@@ -74,14 +74,14 @@ const connect = (data: { username: string }) => {
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item', 'teal-text', 'text-ligten-1', 'right-align')
+    $li.classList.add('collection-item', 'cyan-text', 'text-ligten-1', 'right-align')
     $('#main .chat .chatbox ul').append($li);
   });
 
   socket.on('incoming', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item', 'teal-text', 'text-ligten-4')
+    $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4')
     $('#main .chat .chatbox ul').append($li);
   });
 
