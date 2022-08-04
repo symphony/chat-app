@@ -15,6 +15,11 @@ const scrub = (s: string) => {
   return s.replace(...r1).replace(...r2);
 };
 
+// = socket helpers =
+const emitUserlist = (socket: any) => {
+  socket.emit('userlist', { users: Object.values(onlineUsers) });
+};
+
 // = local data =
 const onlineUsers: { [id: string]: User } = { test: { id: 'abcdefg', username: 'test-user' } };
 
@@ -26,8 +31,9 @@ export const listen = (httpServer: Server) => {
   socket.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
-    if (!username) socket.to(id).emit('userlist:', Object.values(onlineUsers));
+    if (!username) emitUserlist(socket);
     console.log(id, 'connected'); // anonymous login
+    emitUserlist(socket);
 
     client.on('login', (body: { username: string }, callback) => {
       username = scrub(removeSymbols(body.username));
@@ -37,13 +43,13 @@ export const listen = (httpServer: Server) => {
 
       console.log(username, 'logged in');
       socket.except(id).emit('announce', username + ' is online');
-      socket.emit('userlist:', { ...onlineUsers });
+      emitUserlist(socket);
     });
 
     client.on('disconnect', () => {
       console.log(username, 'logged out');
       delete onlineUsers[id];
-      socket.emit('userlist:', Object.values(onlineUsers));
+      emitUserlist(socket);
     });
 
     client.on('send', (body: string) => {
@@ -56,11 +62,9 @@ export const listen = (httpServer: Server) => {
     // Client Message
     // server.to(id).emit('alert', 'Your ID is: ' + id);
 
-    socket.emit('userlist:', Object.values(onlineUsers));
+    emitUserlist(socket);
   });
 
   return socket;
 };
-
-
 

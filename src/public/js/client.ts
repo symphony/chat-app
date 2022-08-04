@@ -53,7 +53,7 @@ const disconnect = (socket: Socket) => {
 };
 
 const updateHeader = (text: string) => {
-  $('#header header > :first-child').html(document.createTextNode(text));
+  $('#header header > :first-child').html(document.createTextNode(text))
 };
 
 // = functions =
@@ -94,16 +94,16 @@ const connect = (data: { username: string }) => {
     $('#main .chat .chatbox ul').append($li);
   });
 
-  socket.on('userlist', (data: User[]) => {
-    const users = data.map((user) => {
+  socket.on('userlist', (data: { [users: string]: User[] }) => {
+    console.log('is it users', typeof data, data);
+    const users = data.users?.map((user) => {
       const $li = document.createElement('li');
       $li.appendChild(document.createTextNode(user.username));
       $li.classList.add('collection-item', 'blue-grey-text', 'text-darken-4');
       return $li;
-    });
+    }) ?? [];
 
-    console.log('new users', users);
-    $('#main #side-panel .userlist ul').append(...users);
+    $('#main #side-panel .userlist ul').html('').append(...users);
   });
 
   return socket;
