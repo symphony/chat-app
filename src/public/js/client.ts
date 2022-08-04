@@ -85,6 +85,17 @@ const connect = (data: { username: string }) => {
     $('#main .chat .chatbox ul').append($li);
   });
 
+  socket.on('userlist', (data: User[]) => {
+    const users = data.map((user) => {
+      const $li = document.createElement('li');
+      $li.appendChild(document.createTextNode(user.username));
+      $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4');
+      return $li;
+    });
+
+    $('#side-panel .userlist ul').append(...users);
+  });
+
   return socket;
 };
 
@@ -95,5 +106,5 @@ const disconnect = (socket: Socket) => {
 
 
 const updateHeader = (text: string) => {
-  $('#header header h2').html(document.createTextNode(text));
+  $('#header header > :first-child').html(document.createTextNode(text));
 };

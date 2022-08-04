@@ -38,17 +38,18 @@
           <form class="connect input-field valign-wrapper row">
             <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
               maxlength="30">
-            <label for="username" class="">Username</label>
+            <!-- <label for="username" class="">Username</label> -->
             <button type="submit" class="col s4 btn waves-effect">Connect</button>
           </form>
 
-          <!-- hide when not logged in -->
-          <form hidden class="disconnect">
-            <button type="button" class="col s4 btn waves-effect">Disconnect</button>
-          </form>
 
         </section>
       </main>
+
+      <!-- hide when not logged in -->
+      <form class="disconnect right">
+        <button type="button" class="col s4 btn waves-effect">Disconnect</button>
+      </form>
 
     </nav>
   </header>
@@ -66,7 +67,7 @@
     </header>
 
 
-    <!-- Main Container -->
+    <!-- Main Grid Container -->
     <div class="row">
 
       <!-- Chat Room -->
@@ -121,6 +122,9 @@
           <header>
             <h5>Online</h5>
           </header>
+          <main class="blue-grey darken-4">
+            <ul class="collection"></ul>
+          </main>
         </section>
       </section>
     </div>
@@ -141,7 +145,7 @@
 
   <!-- JavaScript -->
   <script>
-    M.AutoInit();
+    // M.AutoInit();
   </script>
 </body>
 
