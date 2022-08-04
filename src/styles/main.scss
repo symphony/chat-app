@@ -3,12 +3,6 @@ body {
   color: $light1;
   font-size: 2rem;
 
-  #header, #main {
-    width: 95%;
-    margin: auto;
-  }
-
-
 
   form {
     @include font-scale;
