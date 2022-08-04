@@ -7,7 +7,7 @@ $(() => {
   const $login = $('#header .login');
 
   // = events =
-  $login.find('.connect form').on('submit', (e) => {
+  $login.find('form.connect').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
     const $input = $this.find('input');
@@ -26,7 +26,7 @@ $(() => {
     if (!userSocket) return;
     disconnect(userSocket);
     userSocket = mainSocket;
-    $login.find('h2').text('Please Login');
+    updateHeader('Please Login');
   });
 
   $('#main .chat form').on('submit', (e) => {
@@ -61,6 +61,7 @@ const connect = (data: { username: string }) => {
   socket.on('announce', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
+    $li.classList.add('collection-item');
     $('#main .announce > ul').prepend($li);
   });
 
@@ -73,7 +74,7 @@ const connect = (data: { username: string }) => {
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item right')
+    $li.classList.add('collection-item', 'right')
     $('#main .chat .chatbox ul').append($li);
   });
 
