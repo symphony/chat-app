@@ -2,8 +2,8 @@ import { Socket, ServerOptions } from 'socket.io'; // types
 
 $(() => {
   // create main socket ie. not logged in
-  const mainSocket = createSocket('/');
-  let userSocket = mainSocket;
+  const mainSocket = createSocket(); // TODO: do something with this. set up anonymous listen event
+  let userSocket: Socket | null = null;
   const $login = $('#header .login');
 
   // = events =
@@ -25,7 +25,7 @@ $(() => {
   $('#header .disconnect button').on('click', () => {
     if (!userSocket) return;
     disconnect(userSocket);
-    userSocket = mainSocket;
+    userSocket = null;
     updateHeader('Please Login');
   });
 
@@ -41,14 +41,16 @@ $(() => {
     $input.val('');
     userSocket.emit('send', message);
   });
+
+  // = anon listeners =
+  listen(mainSocket);
 });
 
 // = helpers =
 // @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
-const createSocket = (url: string, options?: ServerOptions): Server => io(options);
+const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 
 const disconnect = (socket: Socket) => {
-  console.log('Disconnected from server\n');
   socket.disconnect();
 };
 
@@ -56,30 +58,47 @@ const updateHeader = (text: string) => {
   $('#header header > :first-child').html(document.createTextNode(text))
 };
 
-// = functions =
+// = main listener =
 const connect = (data: { username: string }) => {
   const socket = createSocket('/users');
 
   socket.on('connect', () => {
     socket.emit('login', data, (e: Error | null, message: string) => {
-      if (e) return console.error(e);
+      if (e) return console.error(e?.message);
       updateHeader(`Hello, ${message}!`);
     });
   });
 
+  // user listener
+  listen(socket);
+  return socket;
+};
+
+const listen = (socket: Socket) => {
+  // render server announcements
   socket.on('announce', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item');
+    $li.classList.add('collection-item', 'black-text');
     $('#footer .announce > ul').prepend($li);
   });
 
+  // render personal alerts
   socket.on('alert', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
     $('#header .alert > ul').html($div);
   });
 
+  // render incoming messages
+  socket.on('incoming', (data: string) => {
+    const $li = document.createElement('li');
+    $li.appendChild(document.createTextNode(data));
+    $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4');
+    $('#main .chat .chatbox ul').append($li);
+  });
+
+  // render outgoing message
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
@@ -87,25 +106,17 @@ const connect = (data: { username: string }) => {
     $('#main .chat .chatbox ul').append($li);
   });
 
-  socket.on('incoming', (data: string) => {
-    const $li = document.createElement('li');
-    $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4')
-    $('#main .chat .chatbox ul').append($li);
-  });
-
-  socket.on('userlist', (data: { [users: string]: User[] }) => {
-    console.log('is it users', typeof data, data);
-    const users = data.users?.map((user) => {
+  // refresh userlist
+  socket.on('userlist', (data: { [users: string]: User[]; }) => {
+    const users = data.users.map((user) => {
       const $li = document.createElement('li');
       $li.appendChild(document.createTextNode(user.username));
       $li.classList.add('collection-item', 'blue-grey-text', 'text-darken-4');
       return $li;
-    }) ?? [];
+    });
 
     $('#main #side-panel .userlist ul').html('').append(...users);
   });
 
-  return socket;
-};
+}
 

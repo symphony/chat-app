@@ -1,6 +1,13 @@
 import * as socketio from 'socket.io';
 import { Server } from 'http'; // types
 
+// = types =
+interface UserDB {
+  [id: string]: User;
+};
+
+// = local data =
+const onlineUsers: UserDB = { test: { id: 'abcdefg', username: 'test-user' } };
 
 // = helpers =
 const removeSymbols = (s: string) => {
@@ -16,40 +23,43 @@ const scrub = (s: string) => {
 };
 
 // = socket helpers =
-const emitUserlist = (socket: any) => {
-  socket.emit('userlist', { users: Object.values(onlineUsers) });
+const emitUserlist = (socket: any, users: UserDB, id: User['id'] | null = null) => {
+  if (id) return socket.to(id).emit('userlist', { users: Object.values(users) });
+  socket.emit('userlist', { users: Object.values(users) });
 };
-
-// = local data =
-const onlineUsers: { [id: string]: User } = { test: { id: 'abcdefg', username: 'test-user' } };
 
 // = main function =
 export const listen = (httpServer: Server) => {
   const socket = new socketio.Server(httpServer);
 
-  // client connects
+  // on page load or form submit
   socket.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
-    if (!username) emitUserlist(socket);
-    console.log(id, 'connected'); // anonymous login
-    emitUserlist(socket);
 
+    if (!username) emitUserlist(socket, onlineUsers, id);
+    console.log(id, 'connected');
+
+
+    // = events =
+    // user logs in
     client.on('login', (body: { username: string }, callback) => {
       username = scrub(removeSymbols(body.username));
       onlineUsers[id] = { id, username };
       callback(null, username);
 
-
       console.log(username, 'logged in');
       socket.except(id).emit('announce', username + ' is online');
-      emitUserlist(socket);
+      emitUserlist(socket, onlineUsers);
     });
 
     client.on('disconnect', () => {
-      console.log(username, 'logged out');
+      console.log(username ?? id, 'logged out');
+      if (!username) return;
+
       delete onlineUsers[id];
-      emitUserlist(socket);
+      username = null;
+      emitUserlist(socket, onlineUsers);
     });
 
     client.on('send', (body: string) => {
@@ -61,8 +71,6 @@ export const listen = (httpServer: Server) => {
 
     // Client Message
     // server.to(id).emit('alert', 'Your ID is: ' + id);
-
-    emitUserlist(socket);
   });
 
   return socket;
