@@ -24,26 +24,26 @@
 
 <body class="grey darken-4 white-text text-darken-1 flow-text">
 
-  <header id="header">
-    <nav class="nav-wrapper">
+  <header id="header" class="">
+    <nav class="">
 
-      <section class="row container">
-        <header class="col s6">
+      <section class="row container nav-wrapper valign-wrapper">
+        <header class="col s8">
           <h2>Please Login</h2>
         </header>
 
-        <main class="col s6 login">
+        <main class="col s4 login valign-wrapper">
           <!-- hide when logged in -->
-          <form class="row connect">
+          <form class="connect input-field row valign-wrapper col s12">
             <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
               maxlength="30">
             <label for="username">Username</label>
-            <button type="submit" class="col s3 btn waves-effect">Connect</button>
+            <button type="submit" class="col s4 btn waves-effect">Connect</button>
           </form>
 
           <!-- hide when not logged in -->
-          <form class="disconnect">
-            <button type="button" class="btn waves-effect">Disconnect</button>
+          <form hidden class="disconnect">
+            <button type="button" class="col s4 btn waves-effect">Disconnect</button>
           </form>
 
         </main>
@@ -51,23 +51,23 @@
 
     </nav>
   </header>
-  <br>
+
 
   <main id="main" class="container">
-    <div id="notify">
+    <div id="notify" class="row">
       <h3></h3>
       <ul class="collection"></ul>
     </div>
 
-    <section class="chat">
+    <section class="row chat col s6">
       <h3>Chat</h3>
-      <form class="input-field">
-        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4">
-        <button type="submit" class="btn waves-effect">Send<i
-            class="material-icons left blue-grey-text text-darken-3">textsms</i></button>
+      <form class="row input-field col s7">
+        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4 col s10">
+        <button type="submit" class="btn waves-effect col s2">Send<i
+            class="material-icons left blue-grey-text text-darken-2">textsms</i></button>
       </form>
 
-      <div class="chatbox blue-grey darken-1">
+      <div class="row chatbox blue-grey darken-1 col s7">
         <h3></h3>
         <ul class="collection blue-grey darken-1"></ul>
       </div>
@@ -82,6 +82,10 @@
 
   </main>
   <footer id="footer"></footer>
+
+  <script>
+    M.AutoInit();
+  </script>
 </body>
 
 </html>
