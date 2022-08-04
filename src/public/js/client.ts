@@ -65,10 +65,10 @@ const connect = (data: { username: string }) => {
     $('#footer .announce > ul').prepend($li);
   });
 
-  socket.on('notify', (data: string) => {
+  socket.on('alert', (data: string) => {
     const $div = document.createElement('div');
     $div.appendChild(document.createTextNode(data));
-    $('#header .notify > ul').html($div);
+    $('#header .alert > ul').html($div);
   });
 
   socket.on('outgoing', (data: string) => {

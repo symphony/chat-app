@@ -58,7 +58,7 @@ export const listen = (httpServer: Server) => {
     });
 
     // Client Message
-    // server.to(id).emit('notify', 'Your ID is: ' + id);
+    // server.to(id).emit('alert', 'Your ID is: ' + id);
 
     emitOnlineUsers(id);
   });
