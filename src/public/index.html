@@ -19,20 +19,17 @@
   <script type="module" src="js/client.js"></script>
 
 
+  <title>Socket.io</title>
 </head>
 
 <body class="grey darken-4">
+  <div class="container">
 
-
-  <title>Socket.io</title>
-  </head>
-
-  <body>
     <header id="header">
       <nav>
 
-        <section class="login">
-          <header>
+        <section class="login row">
+          <header class="col-4">
             <h1>Please Login</h1>
             <div id="notify">
               <h3></h3>
@@ -40,7 +37,7 @@
             </div>
           </header>
 
-          <main>
+          <main class="row col-4">
             <form class="connect input-field">
               <input type="text" class="validate blue-grey darken-4" maxlength="30">
               <label for="username">Username</label>
@@ -82,6 +79,7 @@
 
     </main>
     <footer id="footer"></footer>
-  </body>
+  </div>
+</body>
 
 </html>

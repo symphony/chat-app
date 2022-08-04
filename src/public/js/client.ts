@@ -74,7 +74,7 @@ const connect = (data: { username: string }) => {
   socket.on('outgoing', (data: string) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
-    $li.classList.add('collection-item', 'right')
+    $li.classList.add('collection-item', 'right-align')
     $('#main .chat .chatbox ul').append($li);
   });
 
