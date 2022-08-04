@@ -47,6 +47,15 @@ $(() => {
 // @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
 const createSocket = (url: string, options?: ServerOptions): Server => io(options);
 
+const disconnect = (socket: Socket) => {
+  console.log('Disconnected from server\n');
+  socket.disconnect();
+};
+
+const updateHeader = (text: string) => {
+  $('#header header > :first-child').html(document.createTextNode(text));
+};
+
 // = functions =
 const connect = (data: { username: string }) => {
   const socket = createSocket('/users');
@@ -89,7 +98,7 @@ const connect = (data: { username: string }) => {
     const users = data.map((user) => {
       const $li = document.createElement('li');
       $li.appendChild(document.createTextNode(user.username));
-      $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4');
+      $li.classList.add('collection-item', 'blue-grey-text', 'text-darken-4');
       return $li;
     });
 
@@ -100,12 +109,3 @@ const connect = (data: { username: string }) => {
   return socket;
 };
 
-const disconnect = (socket: Socket) => {
-  console.log('Disconnected from server\n');
-  socket.disconnect();
-};
-
-
-const updateHeader = (text: string) => {
-  $('#header header > :first-child').html(document.createTextNode(text));
-};
