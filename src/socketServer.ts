@@ -16,7 +16,7 @@ const scrub = (s: string) => {
 };
 
 // = local data =
-const onlineUsers: { [id: string]: User } = {};
+const onlineUsers: { [id: string]: User } = { test: { id: 'abcdefg', username: 'test-user' } };
 
 // = main function =
 export const listen = (httpServer: Server) => {
@@ -26,8 +26,8 @@ export const listen = (httpServer: Server) => {
   socket.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
-    console.log(id, 'connected');
-
+    if (!username) socket.to(id).emit('userlist:', Object.values(onlineUsers));
+    console.log(id, 'connected'); // anonymous login
 
     client.on('login', (body: { username: string }, callback) => {
       username = scrub(removeSymbols(body.username));
@@ -48,6 +48,7 @@ export const listen = (httpServer: Server) => {
 
     client.on('send', (body: string) => {
       const message = scrub(body.trim());
+      console.log('sending message', message, 'from', username);
       socket.to(id).emit('outgoing', `${message} [${username}]`)
       socket.except(id).emit('incoming', `[${username}] ${message}`)
     });
@@ -55,7 +56,7 @@ export const listen = (httpServer: Server) => {
     // Client Message
     // server.to(id).emit('alert', 'Your ID is: ' + id);
 
-    socket.emit('userlist:', { ...onlineUsers });
+    socket.emit('userlist:', Object.values(onlineUsers));
   });
 
   return socket;

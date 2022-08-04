@@ -7,7 +7,7 @@ $(() => {
   const $login = $('#header .login');
 
   // = events =
-  $login.find('form.connect').on('submit', (e) => {
+  $login.find('.connect').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
     const $input = $this.find('input');
@@ -32,7 +32,7 @@ $(() => {
   $('#main .chat form').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
-    const $input = $this.find('input');
+    const $input = $this.find('textarea');
     const message = $input?.val()?.toString().trim();
 
     // form validation
@@ -93,7 +93,8 @@ const connect = (data: { username: string }) => {
       return $li;
     });
 
-    $('#side-panel .userlist ul').append(...users);
+    console.log('new users', users);
+    $('#main #side-panel .userlist ul').append(...users);
   });
 
   return socket;
