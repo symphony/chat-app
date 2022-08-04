@@ -97,4 +97,3 @@ const disconnect = (socket: Socket) => {
 const updateHeader = (text: string) => {
   $('#header header h2').html(document.createTextNode(text));
 };
-
