@@ -28,8 +28,8 @@
     <header id="header">
       <nav>
 
-        <section class="row login">
-          <header class="col s6">
+        <section class="nav-wrapper row">
+          <header class="nav  col s5 login">
             <h2>Please Login</h2>
             <div id="notify">
               <h3></h3>
@@ -37,17 +37,17 @@
             </div>
           </header>
 
-          <main class="row col s6">
-            <form class="connect row col s8 input-field ">
-              <input type="text" class="validate col s8 blue-grey darken-4 white-text text-accent-3" maxlength="30">
+          <footer class="nav col s7 ">
+            <form class="row connect">
+              <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3" maxlength="30">
               <label for="username">Username</label>
-              <button type="submit" class="btn col s4 waves-effect">Connect</button>
+              <button type="submit" class="col s3 btn waves-effect">Connect</button>
             </form>
 
-            <form class="disconnect col s4 ">
-              <button type="button" class="btn waves-effect">Disconnect</button>
+            <form class="disconnect">
+              <button type="button" class="btn waves-effect disabled">Disconnect</button>
             </form>
-          </main>
+          </footer>
         </section>
 
       </nav>
