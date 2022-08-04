@@ -2,7 +2,7 @@ import { Socket, ServerOptions } from 'socket.io'; // types
 
 $(() => {
   // create main socket ie. not logged in
-  const mainSocket = createSocket(); // TODO: do something with this. set up anonymous listen event
+  const mainSocket = createSocket('anon');
   let userSocket: Socket | null = null;
   const $login = $('#header .login');
 
@@ -19,6 +19,7 @@ $(() => {
     $input.val('');
 
     if (userSocket) userSocket.disconnect();
+    mainSocket.disconnect();
     userSocket = connect({ username });
   });
 

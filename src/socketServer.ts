@@ -58,6 +58,7 @@ export const listen = (httpServer: Server) => {
       if (!username) return;
 
       delete onlineUsers[id];
+      socket.except(id).emit('announce', username + ' is offline');
       username = null;
       emitUserlist(socket, onlineUsers);
     });
