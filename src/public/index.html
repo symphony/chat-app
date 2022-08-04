@@ -38,7 +38,7 @@
           <form class="connect input-field row valign-wrapper col s12">
             <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
               maxlength="30">
-            <label for="username">Username</label>
+            <label for="username" class="">Username</label>
             <button type="submit" class="col s4 btn waves-effect">Connect</button>
           </form>
 
@@ -71,7 +71,8 @@
       </header>
 
       <form class="row input-field">
-        <input type="text" class="validate blue-grey darken-4 white-text text-accent-4 col s6">
+        <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4 col s6"
+          maxlength="600"></textarea>
         <button type="submit" class="btn waves-effect col s2">Send<i
             class="material-icons left blue-grey-text text-darken-2">textsms</i></button>
       </form>
@@ -80,7 +81,29 @@
         <header>
           <h4></h4>
         </header>
-        <ul class="collection blue-grey darken-1"></ul>
+        <ul class="collection blue-grey darken-1">
+          <!-- where messages go -->
+
+          <article class="card container">
+            <section class=" valign-wrapper">
+              <div class="card-image circle col s2">
+                <img src="https://materializecss.com/images/sample-1.jpg">
+              </div>
+
+              <div class="col s10 flow-text">
+                <p class="">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+            </section>
+
+            <footer class="row col s12">
+              <div class="">
+                <a href="#">fb</a>
+                <a href="#">t</a>
+              </div>
+            </footer>
+          </article>
+
+        </ul>
       </div>
     </section>
 
