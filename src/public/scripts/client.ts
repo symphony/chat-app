@@ -1,6 +1,9 @@
 import { Socket, ServerOptions } from 'socket.io'; // types
 
 $(() => {
+  // Initialize materialize-css
+  // @ts-ignore // false positive error
+  M.AutoInit();
   // create main socket ie. not logged in
   const mainSocket = createSocket('anon');
   let userSocket: Socket | null = null;
@@ -44,17 +47,13 @@ $(() => {
   });
 
   // = anon listeners =
-  listen(mainSocket);
+  listenGlobal(mainSocket);
 });
 
 // = helpers =
-// @ts-ignore // visual bug - this line breaks compiler because it can't find 'io' from window even though it's there
+// @ts-ignore // false positive error - this line breaks compiler because it can't find 'io' from window even though it's there
 const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
-
-const disconnect = (socket: Socket) => {
-  socket.disconnect();
-};
-
+const disconnect = (socket: Socket) => { socket.disconnect(); };
 const updateHeader = (text: string) => {
   $('#header header > :first-child').html(document.createTextNode(text))
 };
@@ -65,17 +64,17 @@ const connect = (data: { username: string }) => {
 
   socket.on('connect', () => {
     socket.emit('login', data, (e: Error | null, message: string) => {
-      if (e) return console.error(e?.message);
+      if (e) return console.error(e.message);
       updateHeader(`Hello, ${message}!`);
     });
   });
 
   // user listener
-  listen(socket);
+  listenGlobal(socket);
   return socket;
 };
 
-const listen = (socket: Socket) => {
+const listenGlobal = (socket: Socket) => {
   // render server announcements
   socket.on('announce', (data: string) => {
     const $li = document.createElement('li');

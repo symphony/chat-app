@@ -15,12 +15,16 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- end -->
+
+  <!-- Materialize-css -->
+  <!-- Compiled and minified JavaScript -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- end vendor -->
 
   <!--- User --->
   <link type="text/css" rel="stylesheet" href="styles/index.css" media="screen,projection" />
   <script type="module" src="scripts/client.js"></script>
-  <!-- end -->
+  <!-- end user -->
 
   <title>Socket.io</title>
 </head>
@@ -29,29 +33,31 @@
 
   <!-- Navbar and Header -->
   <header id="header" class="">
-    <nav class="">
+    <nav class="row">
 
-      <main class="row container nav-wrapper valign-wrapper">
+      <section class="container">
         <header class="col s8">
           <h4 class="left-align">Please Login</h4>
         </header>
 
-        <section class="col s4 login valign-wrapper">
-          <!-- hide when logged in -->
-          <form class="connect input-field valign-wrapper row">
-            <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
-              maxlength="30">
-            <!-- <label for="username" class="">Username</label> -->
-            <button type="submit" class="col s4 btn waves-effect">Connect</button>
-          </form>
+        <!-- hide when logged in -->
+        <form class="login connect input-field col s4">
+          <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
+            maxlength="30">
+          <!-- <label for="username" class="">Username</label> -->
 
+          <a href="#" class="col s4">
+            <button type="submit" class="btn waves-effect">Connect</button>
+          </a>
+        </form>
 
-        </section>
-      </main>
+      </section>
 
       <!-- hide when not logged in -->
       <form class="disconnect right">
-        <button type="button" class="col s4 btn waves-effect">Disconnect</button>
+        <a href="#" class="disconnect right">
+          <button type="button" class="col s4 btn waves-effect">Disconnect</button>
+        </a>
       </form>
 
     </nav>
@@ -60,7 +66,7 @@
 
   <!-- Main Section -->
   <main id="main" class="container">
-    <header class="row">
+    <header class="">
       <div id="alert" class="">
         <header>
           <h4></h4>
@@ -70,24 +76,27 @@
     </header>
 
 
-    <!-- Main Grid Container -->
+    <!-- Main Grid Container 2 columns -->
     <div class="row">
 
       <!-- Chat Room -->
-      <section class="chat col s10">
-        <header class="row">
+      <section class="chat col s8">
+        <header class="">
           <h4>Chat</h4>
         </header>
 
-        <form class="row input-field">
-          <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4 col s6"
+        <form class="input-field ">
+          <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4 col s10"
             maxlength="600"></textarea>
-          <button type="submit" class="btn waves-effect col s2">Send<i
-              class="material-icons left blue-grey-text text-darken-2">textsms</i></button>
+          <a href="#">
+            <button type="submit" class="btn waves-effect col s2">Send<i
+                class="material-icons left blue-grey-text text-darken-2">textsms</i>
+            </button>
+          </a>
         </form>
 
         <!-- Message box -->
-        <div class="row chatbox blue-grey darken-1 col s8" style="min-height: 30rem;">
+        <div class="chatbox blue-grey darken-1 col s12" style="min-height: 30rem;">
           <header>
             <h4></h4>
           </header>
@@ -97,9 +106,9 @@
             <!-- dummy card -->
             <!-- <article class="card-panel grey lighten-5 z-depth-1">
               <section class="row row valign-wrapper">
-                <div class="col s2">
+                <aside class="col s2">
                   <img src="https://materializecss.com/images/yuna.jpg" alt="" class="circle responsive-img">
-                </div>
+                </aside>
                 <div class="col s10">
                   <span class="black-text">
                     This is a square image. Add the "circle" class to it to make it appear circular.
@@ -120,10 +129,10 @@
       </section>
 
       <!-- Side panel -->
-      <section id="side-panel" class="col s2">
+      <aside id="side-panel" class="col s2 right">
         <section class="userlist">
           <header>
-            <h5>Online</h5>
+            <h4>Online</h4>
           </header>
           <main class="blue-grey darken-4">
             <ul class="collection">
@@ -133,7 +142,7 @@
             </ul>
           </main>
         </section>
-      </section>
+      </aside>
     </div>
 
   </main>
@@ -149,13 +158,6 @@
     </div>
   </footer>
 
-
-  <!-- Materialize-css -->
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script>
-    M.AutoInit();
-  </script>
 </body>
 
 </html>
