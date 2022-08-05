@@ -1,25 +1,29 @@
 body {
-  background-color: $darkest;
-  color: $light1;
-  font-size: 2rem;
-
-
-  form {
-    @include font-scale;
-
-    font-size: 1rem;
-    margin: 2rem 0;
-
-    input {
-      @include font-scale;
-      font-size: 2em !important;
-      min-width: 12rem;
-      max-width: 30rem;
-      color: $light1;
-    }
+  form label {
+    pointer-events: none;
   }
 
-  button {
-    @include font-scale;
-  }
+  // background-color: $darkest;
+  // color: $light1;
+  // font-size: 2rem;
+
+
+  // form {
+  //   @include font-scale;
+
+  //   font-size: 1rem;
+  //   margin: 2rem 0;
+
+  //   input {
+  //     @include font-scale;
+  //     font-size: 2em !important;
+  //     min-width: 12rem;
+  //     max-width: 30rem;
+  //     color: $light1;
+  //   }
+  // }
+
+  // button {
+  //   @include font-scale;
+  // }
 }
