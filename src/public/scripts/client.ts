@@ -3,17 +3,20 @@ import { Socket, ServerOptions } from 'socket.io'; // types
 $(() => {
   // Initialize materialize-css
   // @ts-ignore // false positive
-  M.AutoInit();
+  // M.AutoInit();
+
   // create main socket ie. not logged in
   const mainSocket = createSocket('anon');
-  let userSocket: Socket | null = null;
   const $login = $('#header .login');
+  let userSocket: Socket | null = null;
 
+  console.log('consooooooole');
   // = events =
   $login.find('.connect').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
     const $input = $this.find('input');
+    console.log('input', $input, $input.val);
     const username = $input?.val()?.toString().trim();
 
     // form validation
@@ -26,7 +29,7 @@ $(() => {
     userSocket = connect({ username });
   });
 
-  $('#header .disconnect button').on('click', () => {
+  $login.find('.disconnect button').on('click', () => {
     if (!userSocket) return;
     disconnect(userSocket);
     userSocket = null;
