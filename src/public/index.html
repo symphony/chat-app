@@ -36,27 +36,30 @@
     <nav class="row">
 
       <section class="container">
-        <header class="col s8">
+        <header class="col s6">
           <h4 class="left-align">Please Login</h4>
         </header>
 
         <!-- hide when logged in -->
-        <form class="login connect input-field col s4">
-          <input type="text" name="username" class="col s8 validate blue-grey darken-4 white-text text-accent-3"
-            maxlength="30">
-          <!-- <label for="username" class="">Username</label> -->
+        <form class="row login col s6">
+          <div class="connect input-field col s8">
+            <i class="material-icons prefix">account_circle</i>
+            <input type="text" name="username" class="validate blue-grey darken-4 white-text text-accent-3"
+              maxlength="30">
+            <!-- <label for="username" class="">Username</label> -->
+          </div>
 
           <a href="#" class="col s4">
-            <button type="submit" class="btn waves-effect">Connect</button>
+            <button type="submit" for="username" class="btn waves-effect">Connect</button>
           </a>
         </form>
 
       </section>
 
       <!-- hide when not logged in -->
-      <form class="disconnect right">
-        <a href="#" class="disconnect right">
-          <button type="button" class="col s4 btn waves-effect">Disconnect</button>
+      <form class="disconnect center-align">
+        <a href="#">
+          <button type="button" class="btn waves-effect">Disconnect</button>
         </a>
       </form>
 
@@ -85,11 +88,15 @@
           <h4>Chat</h4>
         </header>
 
-        <form class="input-field ">
-          <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4 col s10"
-            maxlength="600"></textarea>
-          <a href="#">
-            <button type="submit" class="btn waves-effect col s2">Send<i
+        <form class="row">
+          <div class="input-field col s10">
+            <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4"
+              maxlength="600">
+          </textarea>
+          </div>
+
+          <a href="#" class="col s2">
+            <button type="submit" class="btn waves-effect">Send<i
                 class="material-icons left blue-grey-text text-darken-2">textsms</i>
             </button>
           </a>

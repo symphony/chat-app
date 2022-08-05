@@ -2,7 +2,7 @@ import { Socket, ServerOptions } from 'socket.io'; // types
 
 $(() => {
   // Initialize materialize-css
-  // @ts-ignore // false positive error
+  // @ts-ignore // false positive
   M.AutoInit();
   // create main socket ie. not logged in
   const mainSocket = createSocket('anon');
