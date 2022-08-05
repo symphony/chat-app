@@ -35,14 +35,14 @@
   <header id="header" class="">
     <nav class="row">
 
-      <section class="container">
+      <section class="container login">
         <header class="col s6">
           <h4 class="">Please Login</h4>
         </header>
 
         <!-- hide when logged in -->
-        <form class="row login col s6">
-          <div class="connect input-field col s8">
+        <form class="row connect col s6">
+          <div class="input-field col s8">
             <i class="material-icons prefix">account_circle</i>
             <input type="text" name="username" class="validate blue-grey darken-4 white-text text-accent-3"
               maxlength="30">
@@ -88,6 +88,7 @@
           <h4>Chat</h4>
         </header>
 
+        <!-- Message input -->
         <form class="row">
           <div class="input-field col s10">
             <textarea type="text" class="materialize-textarea blue-grey darken-4 white-text text-accent-4"
@@ -95,6 +96,7 @@
           </textarea>
           </div>
 
+          <!-- Send button -->
           <a href="#" class="col s2">
             <button type="submit" class="btn waves-effect">Send<i
                 class="material-icons left blue-grey-text text-darken-2">textsms</i>
@@ -136,7 +138,7 @@
       </section>
 
       <!-- Side panel -->
-      <aside id="side-panel" class="col s2 right">
+      <aside id="side-panel" class="col s3 offset-s1">
         <section class="userlist">
           <header>
             <h4>Online</h4>
