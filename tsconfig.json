@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "es6",
+    "module": "ESNext",
     "target": "es5",
     "strict": true,
     "downlevelIteration": true,
@@ -9,5 +9,12 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    },
+  }
 }
