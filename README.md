@@ -1,5 +1,5 @@
 # Chat App
-Chatting App built with TypeScript, Materialize-css, Express and Socket.io
+Chatting App built with TypeScript, Express, Materialize-css, Webpack and Socket.io
 
 ## Live Demo
 https://chat-app-2341.herokuapp.com/
@@ -28,6 +28,7 @@ https://chat-app-2341.herokuapp.com/
 - express
 - socket.io
 - socket.io-client
+- webpack
 - @types/express
 - @types/jquery
 - concurrently
