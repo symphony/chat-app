@@ -5,6 +5,10 @@ body {
     pointer-events: none;
   }
 
+  #main #side-panel .userlist li {
+    cursor: pointer;
+  }
+
   // background-color: $darkest;
   // color: $light1;
   // font-size: 2rem;
