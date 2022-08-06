@@ -9,7 +9,7 @@ https://chat-app-2341.herokuapp.com/
 - Custom usernames
 
 ## Prototype
-<img alt="initial functionality of app: navbar, greeting, chatbox, online userlist" src="_docs/01-prototype.png?raw=true" width="800" name="Dashboard" ></img>
+<img alt="initial functionality of app: navbar, greeting, chatbox, online userlist" src="_docs/01-chatting.png?raw=true" width="800" name="Dashboard" ></img>
 
 ## For Devs - Usage
 **Clone the repo** 
