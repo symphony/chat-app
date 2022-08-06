@@ -6,17 +6,15 @@ $(() => {
   // M.AutoInit();
 
   // create main socket ie. not logged in
-  const mainSocket = createSocket('anon');
+  let mainSocket = createSocket('anon');
   const $login = $('#header .login');
   let userSocket: Socket | null = null;
 
-  console.log('consooooooole');
   // = events =
   $login.find('.connect').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
     const $input = $this.find('input');
-    console.log('input', $input, $input.val);
     const username = $input?.val()?.toString().trim();
 
     // form validation
@@ -26,13 +24,16 @@ $(() => {
 
     if (userSocket) userSocket.disconnect();
     mainSocket.disconnect();
+    mainSocket = null;
     userSocket = connect({ username });
   });
 
-  $login.find('.disconnect button').on('click', () => {
+  $('#header .disconnect button').on('click', (e) => {
+    e.preventDefault();
     if (!userSocket) return;
-    disconnect(userSocket);
+    userSocket.disconnect();
     userSocket = null;
+    mainSocket = createSocket('anon'); // todo: better way of opening anon connection
     updateHeader('Please Login');
   });
 
@@ -56,9 +57,8 @@ $(() => {
 // = helpers =
 // @ts-ignore // false positive error - this line breaks compiler because it can't find 'io' from window even though it's there
 const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
-const disconnect = (socket: Socket) => { socket.disconnect(); };
 const updateHeader = (text: string) => {
-  $('#header header > :first-child').html(document.createTextNode(text))
+  $('#header header > :first-child').html(document.createTextNode(text));
 };
 
 // = main listener =
