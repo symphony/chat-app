@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack",
+    "build": "ts-node webpack.config.ts",
     "manual-build": "npm run clean && npm run sass && tsc && npm run copy-files && npm run remove-ts",
     "clean": "rm -rf ./dist",
     "copy-files": "cp -rv ./src/public ./dist",

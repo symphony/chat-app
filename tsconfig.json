@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "ESNext",
+    "module": "es6",
     "target": "es5",
     "strict": true,
     "downlevelIteration": true,
@@ -16,5 +16,6 @@
     "compilerOptions": {
       "module": "CommonJS"
     },
+    "esm": true
   }
 }

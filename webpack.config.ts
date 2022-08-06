@@ -1,7 +1,7 @@
 import * as webpack from 'webpack';
 import 'webpack-dev-server';
 
-const clientConfig: webpack.Configuration = {
+const clientConfig: any = {
   name: 'client',
   target: 'web',
   entry: 'src/public/scripts/client.js',
@@ -31,7 +31,7 @@ const clientConfig: webpack.Configuration = {
     "./**/*.ts"
   ]
 }
-const serverConfig: webpack.Configuration = {
+const serverConfig: any = {
   name: 'server',
   target: 'node',
   entry: 'src/server.ts',
@@ -58,6 +58,6 @@ const serverConfig: webpack.Configuration = {
 
 
 export default [
-  // clientConfig,
-  serverConfig
+  clientConfig,
+  serverConfig,
 ];
