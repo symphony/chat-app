@@ -1,4 +1,6 @@
 body {
+
+  // disable text selection/highlighting on label
   form label {
     pointer-events: none;
   }
