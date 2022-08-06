@@ -21,7 +21,10 @@ $(() => {
     if (!username) return;
     $input.val('');
 
-    if (userSocket) userSocket.disconnect();
+    if (userSocket) {
+      mainSocket = createSocket('anon'); // todo: better way of handling anon connection. should always be open
+      userSocket.disconnect();
+    }
     mainSocket.disconnect();
     mainSocket = null;
     userSocket = connect({ username });
@@ -30,10 +33,10 @@ $(() => {
   $('#header .disconnect button').on('click', (e) => {
     e.preventDefault();
     if (!userSocket) return;
-    mainSocket = createSocket('anon'); // todo: better way of opening anon connection
-    listenGlobal(mainSocket);
     userSocket.disconnect();
     userSocket = null;
+    mainSocket = createSocket('anon'); // todo: better way of handling anon connection. should always be open
+    listenGlobal(mainSocket);
     updateHeader('Please Login');
   });
 
@@ -68,7 +71,7 @@ const connect = (data: { username: string }) => {
   socket.on('connect', () => {
     socket.emit('login', data, (e: Error | null, message: string) => {
       if (e) return console.error(e.message);
-      updateHeader(`Hello, ${message}!`);
+      updateHeader(message);
     });
   });
 

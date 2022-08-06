@@ -7,7 +7,7 @@ interface UserDB {
 };
 
 // = local data =
-const onlineUsers: UserDB = { test: { id: 'abcdefg', username: 'test-user' } };
+const onlineUsers: UserDB = { test: { id: 'abcdefg', username: 'welcome-bot' } };
 
 // = helpers =
 const removeSymbols = (s: string) => {
@@ -37,9 +37,8 @@ export const listen = (httpServer: Server) => {
     const id = client.id;
     let username: string | null = null;
 
-    if (!username) emitUserlist(socket, onlineUsers, id);
+    emitUserlist(socket, onlineUsers, id);
     console.log(id, 'connected');
-
 
     // = events =
     // user logs in
@@ -50,6 +49,7 @@ export const listen = (httpServer: Server) => {
 
       console.log(username, 'logged in');
       socket.emit('announce', username + ' is online');
+      socket.to(id).emit('incoming', `[welcome-bot] Hello, ${username}!`);
       emitUserlist(socket, onlineUsers);
     });
 
