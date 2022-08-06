@@ -49,17 +49,15 @@ export const listen = (httpServer: Server) => {
       callback(null, username);
 
       console.log(username, 'logged in');
-      socket.except(id).emit('announce', username + ' is online');
+      socket.emit('announce', username + ' is online');
       emitUserlist(socket, onlineUsers);
     });
 
     client.on('disconnect', () => {
       console.log(username ?? id, 'logged out');
-      if (!username) return;
-
-      delete onlineUsers[id];
-      socket.except(id).emit('announce', username + ' is offline');
+      if (username) delete onlineUsers[id];
       username = null;
+      socket.emit('announce', username + ' is offline');
       emitUserlist(socket, onlineUsers);
     });
 

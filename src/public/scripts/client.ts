@@ -7,8 +7,8 @@ $(() => {
 
   // create main socket ie. not logged in
   let mainSocket = createSocket('anon');
-  const $login = $('#header .login');
   let userSocket: Socket | null = null;
+  const $login = $('#header .login');
 
   // = events =
   $login.find('.connect').on('submit', (e) => {
@@ -19,7 +19,6 @@ $(() => {
 
     // form validation
     if (!username) return;
-
     $input.val('');
 
     if (userSocket) userSocket.disconnect();
@@ -31,9 +30,10 @@ $(() => {
   $('#header .disconnect button').on('click', (e) => {
     e.preventDefault();
     if (!userSocket) return;
+    mainSocket = createSocket('anon'); // todo: better way of opening anon connection
+    listenGlobal(mainSocket);
     userSocket.disconnect();
     userSocket = null;
-    mainSocket = createSocket('anon'); // todo: better way of opening anon connection
     updateHeader('Please Login');
   });
 
