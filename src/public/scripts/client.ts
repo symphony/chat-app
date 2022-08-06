@@ -6,7 +6,7 @@ $(() => {
   // M.AutoInit();
 
   // create main socket ie. not logged in
-  let mainSocket = createSocket('anon');
+  let mainSocket = createSocket('/');
   let userSocket: Socket | null = null;
   const $login = $('#header .login');
 
@@ -22,12 +22,14 @@ $(() => {
     $input.val('');
 
     if (userSocket) {
-      mainSocket = createSocket('anon'); // todo: better way of handling anon connection. should always be open
+      mainSocket = createSocket('/'); // todo: better way of handling anon connection. should always be open
       userSocket.disconnect();
     }
     mainSocket.disconnect();
     mainSocket = null;
     userSocket = connect({ username });
+    toggleLoginState(username);
+
   });
 
   $login.find('.disconnect button').on('click', (e) => {
@@ -35,9 +37,9 @@ $(() => {
     if (!userSocket) return;
     userSocket.disconnect();
     userSocket = null;
-    mainSocket = createSocket('anon'); // todo: better way of handling anon connection. should always be open
+    mainSocket = createSocket('/'); // todo: better way of handling anon connection. should always be open
     listenGlobal(mainSocket);
-    updateHeader('Please Login');
+    toggleLoginState();
   });
 
   $('#main .chat form').on('submit', (e) => {
@@ -53,24 +55,25 @@ $(() => {
     userSocket.emit('send', message);
   });
 
-  toggleLoginState(userSocket);
+  toggleLoginState();
   listenGlobal(mainSocket);
 });
 
 // = helpers =
 // @ts-ignore // false positive error - this line breaks compiler because it can't find 'io' from window even though it's there
-const createSocket = (url?: string, options?: ServerOptions): Server => io(url, options);
+const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 const updateHeader = (text: string) => {
   $('#header header > :first-child').html(document.createTextNode(text));
 };
 
-const toggleLoginState = (userSocket: Socket | null) => {
+const toggleLoginState = (username?: string) => {
   const $login = $('#header .login');
   const $chat = $('#main .chat');
 
-  $login.find('.connect').css('display', !userSocket ? 'block' : 'none');
-  $login.find('.disconnect').css('display', userSocket ? 'float' : 'none');
-  $chat.find('form').css('display', !userSocket ? 'block' : 'none');
+  $login.find('.connect').css('display', !username ? 'block' : 'none');
+  $login.find('.disconnect').css('display', username ? 'block' : 'none');
+  $chat.find('form').css('display', username ? 'block' : 'none');
+  updateHeader(username || 'Please Login');
 };
 
 // = main listener =
@@ -80,7 +83,7 @@ const connect = (data: { username: string }) => {
   socket.on('connect', () => {
     socket.emit('login', data, (e: Error | null, message: string) => {
       if (e) return console.error(e.message);
-      toggleLoginState(socket);
+      toggleLoginState(data.username);
       updateHeader(message);
     });
   });
