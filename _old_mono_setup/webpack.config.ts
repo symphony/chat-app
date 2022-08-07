@@ -53,7 +53,7 @@ const clientConfig: WebpackConfiguration = {
 
 const serverConfig: WebpackConfiguration = {
   name: 'server',
-  // target: 'node',
+  target: 'node',
   entry: './src/server/index.ts',
   mode: 'development',
   resolve: {
