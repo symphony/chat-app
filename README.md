@@ -33,3 +33,4 @@ https://chat-app-2341.herokuapp.com/
 - @types/jquery
 - concurrently
 - nodemon
+- ts-node
