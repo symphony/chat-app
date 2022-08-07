@@ -1,0 +1,37 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# production
+.vscode
+build
+dist
+
+## for sass
+# public/styles
+# **.*.map
+
+# misc
+*Storage
+sync
+*.DS_Store
+*Thumbs.db
+
+# development env
+*.env
+*.env.**
+secrets
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# always track
+!*.gitignore
+!*.example

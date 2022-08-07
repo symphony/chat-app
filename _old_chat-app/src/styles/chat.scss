@@ -1,0 +1,12 @@
+// chatbox
+#main .chat {
+  .chatbox {
+    @include font-scale;
+    color: aqua;
+    margin: 4rem 0;
+    padding: 0.1em 1em;
+    border-radius: $radius;
+    min-height: 30rem;
+    max-width: 40rem;
+  }
+}
