@@ -6,16 +6,20 @@ const clientConfig: WebpackConfiguration = {
   target: 'web',
   mode: 'development',
   resolve: {
-    extensions: ['.ts', '.html', '.scss'],
+    extensions: ['.ts', 'js', '.html', '.scss'],
     modules: ['node_modules'],
+    fallback: {
+      fs: false,
+    },
   },
   entry: './src/public/scripts/client.ts',
-  output: {
-    path: path.resolve(__dirname, 'dist/public/scripts'),
-    filename: 'client.js',
-  },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -27,21 +31,29 @@ const clientConfig: WebpackConfiguration = {
           "sass-loader",
         ],
       },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
     ],
   },
-}
+  output: {
+    path: path.resolve(__dirname, 'dist/public/scripts'),
+    filename: 'client.js',
+  },
+};
+
 const serverConfig: WebpackConfiguration = {
   name: 'server',
   target: 'node',
   entry: './src/server.ts',
   mode: 'development',
   resolve: {
-    extensions: ['.ts',],
+    extensions: ['.ts', 'js',],
     modules: ['node_modules'],
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist/index.js'),
-    filename: 'server.js',
+    fallback: {
+      fs: false,
+    },
   },
   module: {
     rules: [
@@ -51,6 +63,14 @@ const serverConfig: WebpackConfiguration = {
         exclude: /node_modules/,
       },
     ],
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'server.js',
+  },
+  externals: {
+    bufferutil: "bufferutil",
+    "utf-8-validate": "utf-8-validate",
   },
 };
 
