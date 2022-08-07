@@ -7,10 +7,7 @@ const clientConfig: WebpackConfiguration = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', 'js', '.html', '.scss'],
-    modules: ['node_modules'],
-    fallback: {
-      fs: false,
-    },
+
   },
   entry: './src/public/scripts/client.ts',
   module: {
@@ -46,14 +43,11 @@ const clientConfig: WebpackConfiguration = {
 const serverConfig: WebpackConfiguration = {
   name: 'server',
   target: 'node',
-  entry: './src/server.ts',
+  entry: './src/server/index.ts',
   mode: 'development',
   resolve: {
     extensions: ['.ts', 'js',],
-    modules: ['node_modules'],
-    fallback: {
-      fs: false,
-    },
+
   },
   module: {
     rules: [
@@ -66,7 +60,7 @@ const serverConfig: WebpackConfiguration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'server.js',
+    filename: 'index.js',
   },
   externals: {
     bufferutil: "bufferutil",
@@ -74,39 +68,7 @@ const serverConfig: WebpackConfiguration = {
   },
 };
 
-
 export default [
   clientConfig,
   serverConfig,
 ];
-
-
-// export default [
-//   {
-//     name: 'client',
-//     target: 'web',
-//     mode: 'development',
-//     entry: './src/public/scripts/client.ts',
-//     resolve: {
-//       extensions: ['.ts', '.html', '.scss'],
-//       modules: ['node_modules'],
-//     },
-//     output: {
-//       path: path.resolve(__dirname, 'dist'),
-//       filename: 'client.js',
-//     },
-//   },
-//   {
-//     name: 'server',
-//     target: 'node',
-//     mode: 'development',
-//     entry: './src/server.ts',
-//     resolve: {
-//       extensions: ['.ts', 'js',],
-//       modules: ['node_modules'],
-//     },
-//     output: {
-//       path: path.resolve(__dirname, 'dist'),
-//       filename: 'server.js',
-//     },
-//   }];

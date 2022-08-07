@@ -30,7 +30,7 @@ const emitUserlist = (socket: any, users: UserDB, id: User['id'] | null = null) 
 
 // = main function =
 export const listen = (httpServer: Server) => {
-  const socket = new socketio.Server(httpServer);
+  const socket = new socketio.Server(httpServer, { serveClient: false });
 
   // on page load or form submit
   socket.on('connection', (client: socketio.Socket) => {

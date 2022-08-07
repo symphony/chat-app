@@ -2,7 +2,7 @@
   "name": "chat-app",
   "version": "1.0.0",
   "description": "Chatting App to demonstrate Socket.io library",
-  "main": "server.ts",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "build": "webpack",
@@ -11,8 +11,8 @@
     "copy-files": "cp -rv ./src/public ./dist",
     "remove-ts": "find ./dist -name \"*.ts\" -type f -print0 | xargs -0 /bin/rm -f",
     "sass": "sass ./src/styles/index.scss:./dist/public/styles/index.css",
-    "start": "node dist/server.js",
-    "dev": "npm run build && concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/server.js\""
+    "start": "node dist/index.js",
+    "dev": "npm run build && concurrently \"npm run sass -- --watch\" \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
   "author": "",
