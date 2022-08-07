@@ -24,5 +24,8 @@
       "dependsOn": [ "build", "lint" ],
       "outputs": [ ]
     }
-  }
+  },
+  "globalDependencies": [
+    "tsconfig.json"
+  ]
 }
