@@ -1,16 +1,25 @@
 import path from 'path';
 import { WebpackConfiguration } from 'webpack-dev-server';
 import nodeExternals from 'webpack-node-externals';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const clientConfig: WebpackConfiguration = {
   name: 'client',
   target: 'web',
   mode: 'development',
+  entry: './src/public/scripts/client.ts',
+  devServer: {
+    static: './dist',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Output Management',
+    }),
+  ],
   resolve: {
     extensions: ['.ts', 'js', '.html', '.scss'],
 
   },
-  entry: './src/public/scripts/client.ts',
   module: {
     rules: [
       {
@@ -37,7 +46,8 @@ const clientConfig: WebpackConfiguration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist/public/scripts'),
-    filename: 'client.js',
+    filename: '[name].bundle.js',
+    clean: true,
   },
 };
 
@@ -48,7 +58,6 @@ const serverConfig: WebpackConfiguration = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', 'js',],
-
   },
   module: {
     rules: [
@@ -61,7 +70,8 @@ const serverConfig: WebpackConfiguration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: '[name].bundle.js',
+    publicPath: '/server',
   },
   externalsPresets: { node: true },
   externals: [nodeExternals()],
