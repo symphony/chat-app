@@ -2,6 +2,8 @@
   "name": "turbo-with-svelte",
   "version": "0.0.0",
   "private": true,
+  "repository": "git@github.com:symphony/turbo-with-svelte.git",
+  "author": "symphony <jciurc@gmail.com>",
   "workspaces": [
     "apps/*",
     "packages/*"
