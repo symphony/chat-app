@@ -11,8 +11,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "client": "yarn workspace client",
+    "server": "yarn workspace server"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
