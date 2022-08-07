@@ -1,5 +1,6 @@
-const path = require('path');
+import path from 'path';
 import { WebpackConfiguration } from 'webpack-dev-server';
+import nodeExternals from 'webpack-node-externals';
 
 const clientConfig: WebpackConfiguration = {
   name: 'client',
@@ -42,7 +43,7 @@ const clientConfig: WebpackConfiguration = {
 
 const serverConfig: WebpackConfiguration = {
   name: 'server',
-  target: 'node',
+  // target: 'node',
   entry: './src/server/index.ts',
   mode: 'development',
   resolve: {
@@ -62,10 +63,8 @@ const serverConfig: WebpackConfiguration = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
   },
-  externals: {
-    bufferutil: "bufferutil",
-    "utf-8-validate": "utf-8-validate",
-  },
+  externalsPresets: { node: true },
+  externals: [nodeExternals()],
 };
 
 export default [

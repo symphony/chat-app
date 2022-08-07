@@ -13,5 +13,5 @@ const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });
 
-// start socket server
+// start socket connection
 socketServer.listen(server);
