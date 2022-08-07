@@ -16,6 +16,7 @@ This Turborepo includes the following packages/apps:
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Resources
+
 - [Turborepo w/ Svelte](https://github.com/vercel/turborepo/tree/main/examples) official starter template
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting

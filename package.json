@@ -1,9 +1,16 @@
 {
+  "name": "turborepo-with-svelte",
+  "version": "0.0.0",
+  "license": "ISC",
   "private": true,
+  "repository": "git@github.com:symphony/turbo-repo-with-svelte.git",
+  "author": "symphony <jciurc@gmail.com>",
+  "main": "index.js",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
+  "prepare": "svelte-kit sync",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
