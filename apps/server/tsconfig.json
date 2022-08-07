@@ -1,0 +1,10 @@
+{
+  "files": [
+    "tsconfig.json"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    },
+    "esm": true
+  } }

@@ -5,16 +5,20 @@
     "composite": false,
     "declaration": true,
     "declarationMap": true,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
     "moduleResolution": "node",
+    "module": "es6",
+    "target": "es5",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "strict": true,
+    "downlevelIteration": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules"]
 }
