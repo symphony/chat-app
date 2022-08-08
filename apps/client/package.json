@@ -18,7 +18,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@sveltejs/kit": "^1.0.0-next.405",
-    "@tsconfig/svelte": "^2.0.0",
+    "@tsconfig/svelte": "^3.0.0",
     "@types/materialize-css": "^1.0.11",
     "eslint-config-custom": "*",
     "materialize-css": "^1.0.0",

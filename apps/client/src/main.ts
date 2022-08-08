@@ -1,3 +1,4 @@
+// @ts-ignore - false positive?
 import App from "./App.svelte";
 
 import "./styles/index.scss";
