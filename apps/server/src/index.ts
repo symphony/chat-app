@@ -1,5 +1,6 @@
 // = modules =
 import express from 'express';
+import * as socketServer from './socketServer';
 
 // = server config =
 const PORT = process.env.PORT || 3001;
@@ -13,4 +14,4 @@ const server = app.listen(PORT, () => {
 });
 
 // start socket connection
-// socketServer.listen(server);
+socketServer.listen(server);
