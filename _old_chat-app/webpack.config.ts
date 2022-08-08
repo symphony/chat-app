@@ -1,30 +1,29 @@
-import path from 'path';
-import { WebpackConfiguration } from 'webpack-dev-server';
-import nodeExternals from 'webpack-node-externals';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from "path";
+import { WebpackConfiguration } from "webpack-dev-server";
+import nodeExternals from "webpack-node-externals";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const clientConfig: WebpackConfiguration = {
-  name: 'client',
-  target: 'web',
-  mode: 'development',
-  entry: './src/public/scripts/client.ts',
+  name: "client",
+  target: "web",
+  mode: "development",
+  entry: "./src/public/scripts/client.ts",
   devServer: {
-    static: './dist',
+    static: "./dist",
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: "Output Management",
     }),
   ],
   resolve: {
-    extensions: ['.ts', 'js', '.html', '.scss'],
-
+    extensions: [".ts", "js", ".html", ".scss"],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
@@ -45,39 +44,36 @@ const clientConfig: WebpackConfiguration = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist/public/scripts'),
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, "dist/public/scripts"),
+    filename: "[name].bundle.js",
     clean: true,
   },
 };
 
 const serverConfig: WebpackConfiguration = {
-  name: 'server',
-  target: 'node',
-  entry: './src/server/index.ts',
-  mode: 'development',
+  name: "server",
+  target: "node",
+  entry: "./src/server/index.ts",
+  mode: "development",
   resolve: {
-    extensions: ['.ts', 'js',],
+    extensions: [".ts", "js"],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js',
-    publicPath: '/server',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].bundle.js",
+    publicPath: "/server",
   },
   externalsPresets: { node: true },
   externals: [nodeExternals()],
 };
 
-export default [
-  clientConfig,
-  serverConfig,
-];
+export default [clientConfig, serverConfig];
