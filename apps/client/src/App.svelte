@@ -1,14 +1,14 @@
 <script lang="ts">
   import { MyCounterButton } from "ui";
   import Header from "./components/Header.svelte";
+  import { Body } from "svelte-body";
 </script>
 
-
+<!-- Overrides -->
+<Body class="grey darken-4 white-text text-darken-1 flow-text"  />
 
 <!-- Render App -->
 <Header />
-<MyCounterButton />
-
 <!-- Main Section -->
 <main id="main" class="container">
   <header class="">

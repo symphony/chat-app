@@ -42,7 +42,7 @@ export default {
 	plugins: [
 		scss({
 			output: true,
-			includePaths: ['./src/scss']
+			includePaths: ['./src/styles']
 		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
