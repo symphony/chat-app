@@ -1,8 +1,9 @@
 <script lang="ts">
-  let name = "world";
   import { MyCounterButton } from "ui";
   import Header from "./components/Header.svelte";
 </script>
+
+
 
 <!-- Render App -->
 <Header />

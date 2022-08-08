@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
-import sass from 'rollup-plugin-sass';
+import scss from 'rollup-plugin-sass';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,10 +37,13 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'public/build/bundle.js',
 	},
 	plugins: [
-		sass(),
+		scss({
+			output: true,
+			includePaths: ['./src/scss']
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
