@@ -22,7 +22,7 @@ const scrub = (s: string) => {
 
 // parses local data
 const getUpdatedData = () => {
-  return { users: Object.values(onlineUsers), stats };
+  return { users: Object.values(onlineUsers), hits: stats.totalConnections };
 };
 
 
