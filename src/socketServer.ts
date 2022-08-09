@@ -1,13 +1,11 @@
 import * as socketio from 'socket.io';
 import { Server } from 'http'; // types
 
-// = types =
-interface UserDB {
-  [id: string]: User;
-};
-
 // = local data =
 const onlineUsers: UserDB = { test: { id: 'abcdefg', username: 'welcome-bot' } };
+const stats: AppStats = {
+  totalConnections: 0,
+};
 
 // = helpers =
 const removeSymbols = (s: string) => {
@@ -22,22 +20,21 @@ const scrub = (s: string) => {
   return s.replace(...r1).replace(...r2);
 };
 
-// = socket helpers =
-const emitUserlist = (socket: any, users: UserDB, id: User['id'] | null = null) => {
-  if (id) return socket.to(id).emit('userlist', { users: Object.values(users) });
-  socket.emit('userlist', { users: Object.values(users) });
+// parses local data
+const getUpdatedData = () => {
+  return { users: Object.values(onlineUsers), stats };
 };
 
 // = main function =
 export const listen = (httpServer: Server) => {
   const socket = new socketio.Server(httpServer);
 
-  // on page load or form submit
+  // on page load or form submit (anonymous connection)
   socket.on('connection', (client: socketio.Socket) => {
     const id = client.id;
     let username: string | null = null;
 
-    emitUserlist(socket, onlineUsers, id);
+    socket.to(id).emit('newData', getUpdatedData());
     console.log(id, 'connected');
 
     // = events =
@@ -50,7 +47,10 @@ export const listen = (httpServer: Server) => {
       console.log(username, 'logged in');
       socket.emit('announce', username + ' is online');
       socket.to(id).emit('incoming', `[welcome-bot] Hello, ${username}!`);
-      emitUserlist(socket, onlineUsers);
+
+      stats.totalConnections++;
+      socket.emit('newData', getUpdatedData());
+
     });
 
     client.on('disconnect', () => {
@@ -58,7 +58,7 @@ export const listen = (httpServer: Server) => {
       if (username) delete onlineUsers[id];
       username = null;
       socket.emit('announce', username + ' is offline');
-      emitUserlist(socket, onlineUsers);
+      socket.emit('newData', getUpdatedData());
     });
 
     client.on('send', (body: string) => {
