@@ -25,6 +25,7 @@ const getUpdatedData = () => {
   return { users: Object.values(onlineUsers), stats };
 };
 
+
 // = main function =
 export const listen = (httpServer: Server) => {
   const socket = new socketio.Server(httpServer);
