@@ -138,8 +138,9 @@ const listenGlobal = (socket: Socket) => {
       return $li;
     });
 
-    $header.find('.hits').html('Hits: ' + data.stats.totalConnections);
-    $main.find('#side-panel .userlist ul').html('').append(...users);
+    const $userlist = $main.find('#side-panel .userlist');
+    $header.find('.hits').html('Hits: ' + data.stats.totalConnections.toString());
+    $userlist.find('header > :first-child').html('Online: ' + users.length.toString());
+    $userlist.find('ul').html('').append(...users);
   });
 };
-
