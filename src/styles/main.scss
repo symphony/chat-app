@@ -5,6 +5,13 @@ body {
     pointer-events: none;
   }
 
+  #header form label {
+    // transform: translate(3px, 4px);
+  }
+
+  .hits {
+    padding-right: 1em;
+  }
   // background-color: $darkest;
   // color: $light1;
   // font-size: 2rem;
