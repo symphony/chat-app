@@ -130,7 +130,7 @@ const listenGlobal = (socket: Socket) => {
   });
 
   // refresh userlist
-  socket.on('newData', (data: { users: User[], stats: AppStats }) => {
+  socket.on('newData', (data: { users: User[], hits: number }) => {
     const users = data.users.map((user) => {
       const $li = document.createElement('li');
       $li.appendChild(document.createTextNode(user.username));
@@ -139,8 +139,8 @@ const listenGlobal = (socket: Socket) => {
     });
 
     const $userlist = $main.find('#side-panel .userlist');
-    $header.find('.hits').html('Hits: ' + data.stats.totalConnections.toString());
-    $userlist.find('header > :first-child').html('Online: ' + users.length.toString());
+    $header.find('.hits span').html(data.hits.toString());
+    $userlist.find('header span').html(users.length.toString());
     $userlist.find('ul').html('').append(...users);
   });
 };
