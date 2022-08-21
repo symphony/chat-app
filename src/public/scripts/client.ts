@@ -45,7 +45,7 @@ $(() => {
   $('#main .chat form').on('submit', (e) => {
     e.preventDefault();
     const $this = $(e.currentTarget);
-    const $input = $this.find('textarea');
+    const $input = $this.find('input');
     const message = $input?.val()?.toString().trim();
 
     // form validation
@@ -97,6 +97,8 @@ const listenGlobal = (socket: Socket) => {
   const $header = $('#header');
   const $main = $('#main');
   const $chatbox = $main.find('.chatbox');
+  const $messageList = $chatbox.find('ul');
+  const maxMessages = 15;
 
   // render server announcements
   socket.on('announce', (data: string) => {
@@ -115,10 +117,12 @@ const listenGlobal = (socket: Socket) => {
 
   // render incoming messages
   socket.on('incoming', (data: string) => {
+
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
     $li.classList.add('collection-item', 'cyan-text', 'text-ligten-4');
-    $chatbox.find('ul').append($li);
+    $messageList.append($li);
+    trimList($messageList, maxMessages);
   });
 
   // render outgoing message
@@ -126,21 +130,32 @@ const listenGlobal = (socket: Socket) => {
     const $li = document.createElement('li');
     $li.appendChild(document.createTextNode(data));
     $li.classList.add('collection-item', 'cyan-text', 'text-ligten-1', 'right-align');
-    $chatbox.find('ul').append($li);
+    $messageList.append($li);
+    trimList($messageList, maxMessages);
   });
 
   // refresh userlist
   socket.on('newData', (data: { users: User[], hits: number }) => {
-    const users = data.users.map((user) => {
+    const maxUsers = 20;
+    const users = [];
+    const onlineCount = data.users.length;
+
+    for (let i = onlineCount > maxUsers ? onlineCount - maxUsers : 0; i < onlineCount; i++) {
       const $li = document.createElement('li');
-      $li.appendChild(document.createTextNode(user.username));
+      $li.appendChild(document.createTextNode(data.users[i].username));
       $li.classList.add('collection-item', 'blue-grey-text', 'text-darken-4');
-      return $li;
-    });
+      users.push($li);
+    };
 
     const $userlist = $main.find('#side-panel .userlist');
     $header.find('.hits span').html(data.hits.toString());
-    $userlist.find('header span').html(users.length.toString());
+    $userlist.find('header span').html(onlineCount.toString());
     $userlist.find('ul').html('').append(...users);
   });
 };
+function trimList($messageList: JQuery<HTMLUListElement>, maxMessages: number) {
+  if ($messageList.find('li').length > maxMessages) {
+    $messageList.find('li').slice(0, 1).remove();
+  }
+}
+
