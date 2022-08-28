@@ -1,9 +1,9 @@
 // = modules =
 import express from 'express';
-import * as socketServer from './socketServer.js';
+import * as socketServer from './socket';
 
 // = server config =
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.static('dist/public'));
