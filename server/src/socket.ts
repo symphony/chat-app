@@ -1,6 +1,19 @@
 import * as socketio from 'socket.io';
 import { Server } from 'http'; // types
 
+interface User {
+  id: string;
+  username: string;
+}
+
+interface UserDB {
+  [id: string]: User;
+}
+
+interface AppStats {
+  totalConnections: number;
+}
+
 // = local data =
 const onlineUsers: UserDB = { test: { id: 'abcdefg', username: 'welcome-bot' } };
 const stats: AppStats = {
@@ -75,4 +88,3 @@ export const listen = (httpServer: Server) => {
 
   return socket;
 };
-
