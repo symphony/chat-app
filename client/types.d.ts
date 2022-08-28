@@ -32,8 +32,9 @@ declare module '*.styl';
 
 /* IMAGES */
 declare module '*.svg' {
-  const content: any;
+  const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   export default content;
+  alt = string;
 }
 declare module '*.bmp' {
   const ref: string;
