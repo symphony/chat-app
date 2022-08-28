@@ -1,6 +1,6 @@
-import react from 'react';
+import Snowpack from "./components/Snowpack";
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 
 const App = () => {
   return (
@@ -19,6 +19,12 @@ const App = () => {
           Learn React
         </a>
       </header>
+
+
+      <div>
+        <h2>hello ❄️Snowpack❄️</h2>
+        <Snowpack />
+      </div>
     </div>
   );
 }

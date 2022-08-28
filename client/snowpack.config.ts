@@ -5,8 +5,9 @@
 module.exports = {
   mount: {
     public: { url: '/', static: true, resolve: false, },
-    src:  '/dist' ,
+    src: { url: '/dist' },
   },
+  external: ['react'],
   plugins: [
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-dotenv',
@@ -14,6 +15,11 @@ module.exports = {
     '@snowpack/plugin-typescript', // TS support
     'snowpack-plugin-svgr' // import SVG as React component
   ],
+  optimize: {
+    bundle: true,
+    minify: true,
+    target: 'es2018',
+  },
   /* for local SPA fallback routing support, more below */
   routes: [
     { "match": "routes", "src": ".*", "dest": "/index.html" },
@@ -24,9 +30,10 @@ module.exports = {
   testOptions: {
     files: ['src/**/*.test.*']
   },
-  /* optional, if you want to use alias when importing */
   alias: {
     components: "./src/components",
     "@app": "./src/",
-  }
+  },
+  exclude:
+    ['**/node_modules/**/*'],
 };
