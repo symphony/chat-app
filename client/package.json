@@ -20,6 +20,7 @@
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
+    "@snowpack/app-scripts-react": "^2.0.1",
     "@snowpack/plugin-typescript": "^1.2.1",
     "@testing-library/react": "^13.3.0",
     "@types/react": "^18.0.17",

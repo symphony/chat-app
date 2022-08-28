@@ -10,7 +10,9 @@
     "esModuleInterop": true,
   },
   "include": [
-    "./src/**/*.ts*",
-    "types", "src/index.*",
-  ]
+    "src",
+  ],
+  "files": [
+    "src/global.d.ts"
+  ],
 }
