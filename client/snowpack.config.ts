@@ -15,11 +15,6 @@ module.exports = {
     '@snowpack/plugin-typescript', // TS support
     'snowpack-plugin-svgr' // import SVG as React component
   ],
-  optimize: {
-    bundle: true,
-    minify: true,
-    target: 'es2018',
-  },
   /* for local SPA fallback routing support, more below */
   routes: [
     { "match": "routes", "src": ".*", "dest": "/index.html" },
@@ -31,8 +26,9 @@ module.exports = {
     files: ['src/**/*.test.*']
   },
   alias: {
-    components: "./src/components",
     "@app": "./src/",
+    components: "./src/components",
+    styles: "./src/styles",
   },
   exclude:
     ['**/node_modules/**/*'],
