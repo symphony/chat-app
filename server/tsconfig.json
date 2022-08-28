@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "module": "es6",
-    "target": "es5",
+    "target": "es2016",
+    "outFile": "./dist",
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "downlevelIteration": true,
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["./src/**/*", "../public"]
+  }
 }

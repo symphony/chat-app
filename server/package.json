@@ -9,7 +9,6 @@
     "start": "npx tsc && ts-node src/index.ts",
     "test": "jest"
   },
-  "type": "module",
   "dependencies": {
     "express": "^4.18.1",
     "socket.io": "^4.5.1",

@@ -6,8 +6,6 @@ import * as socketServer from './socket';
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(express.static('dist/public'));
-
 // start http server
 const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
