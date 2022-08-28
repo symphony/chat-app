@@ -1,7 +1,7 @@
 import Snowpack from "./components/Snowpack";
 import logo from './logo.svg';
 import './styles/App.css';
-
+console.log('works too');
 const App = () => {
   return (
     <div className="App">
