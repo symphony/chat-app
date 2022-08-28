@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "noImplicitAny": true,
+    "module": "esnext",
     "target": "es5",
     "lib": [
       "dom",
@@ -14,16 +15,22 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
+  "typeRoots": [
+    "node_modules/@types",
   ],
+  "include": [
+    "src",
+    "./src/**/*.ts*",
+  ],
+  "paths": {
+    "@app/*": [ "./src/*" ],
+  },
   "files": [
     "./types.d.ts",
   ],

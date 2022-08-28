@@ -4,21 +4,29 @@
 /** @type {import('snowpack').SnowpackUserConfig } */
 module.exports = {
   mount: {
-    public: { url: '/', static: true },
+    public: { url: '/', static: true, resolve: false, },
+    src:  '/dist' ,
   },
-  external: ['react'],
   plugins: [
-    /* ... */
+    '@snowpack/plugin-react-refresh',
+    '@snowpack/plugin-dotenv',
+    '@snowpack/plugin-webpack',
+    '@snowpack/plugin-typescript', // TS support
+    'snowpack-plugin-svgr' // import SVG as React component
   ],
-  packageOptions: {
-    /* ... */
-  },
+  /* for local SPA fallback routing support, more below */
+  routes: [
+    { "match": "routes", "src": ".*", "dest": "/index.html" },
+  ],
   devOptions: {
-    /* ... */
+    port: 3000,
   },
-  buildOptions: {
-    /* ... */
+  testOptions: {
+    files: ['src/**/*.test.*']
   },
-  exclude:
-    ['**/node_modules/**/*'],
+  /* optional, if you want to use alias when importing */
+  alias: {
+    components: "./src/components",
+    "@app": "./src/",
+  }
 };
