@@ -32,8 +32,8 @@ declare module '*.styl';
 
 /* IMAGES */
 declare module '*.svg' {
-  const ref: string;
-  export default ref;
+  const content: any;
+  export default content;
 }
 declare module '*.bmp' {
   const ref: string;
@@ -57,15 +57,3 @@ declare module '*.png' {
 }
 
 /* CUSTOM: ADD YOUR OWN HERE */
-interface OptimizeOptions {
-  entrypoints: 'auto' | string[] | ((options: {files: string[]}) => string[]);
-  preload: boolean;
-  bundle: boolean;
-  loader?: {[ext: string]: Loader};
-  sourcemap: boolean | 'external' | 'inline' | 'both';
-  splitting: boolean;
-  treeshake: boolean;
-  manifest: boolean;
-  minify: boolean;
-  target: 'es2020' | 'es2019' | 'es2018' | 'es2017';
-}

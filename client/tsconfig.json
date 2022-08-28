@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "module": "ESNext",
     "target": "es5",
     "strict": true,
@@ -14,6 +15,7 @@
     ]
   },
   "include": [
+    "src",
     "./src/**/*.ts*",
   ],
   "paths": {
