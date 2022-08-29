@@ -92,7 +92,6 @@ const App = () => {
   const onDisconnect = () => {
     sendPing();
 
-    if (!socket.connected) return;
     socket.disconnect();
     setUsername(null);
     setSocket(io('/')); // global socket

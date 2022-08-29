@@ -54,8 +54,6 @@ const Login: FC<LoginProps> = ({ user, onConnect, onDisconnect }): ReactElement 
     }}>
       {!user && (
         <Box sx={{ display: 'flex', }} >
-          <Typography variant='h5' >{user || 'Please login'}</Typography>
-
           <form className='connect' onSubmit={handleConnect}>
             <AccountCircle />
             <TextField

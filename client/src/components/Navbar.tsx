@@ -66,6 +66,7 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
             >
             </Typography>
 
+
             {props.user && (
               <Link
                 key={profile.key}
@@ -82,6 +83,7 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
               </Link>
             )}
           </Box>
+          <Typography variant='h5' >{props.user ? 'Welcome, ' + props.user : 'Please Login'}</Typography>
           <Login {...props} />
         </Toolbar>
       </Container >

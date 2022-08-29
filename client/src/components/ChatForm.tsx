@@ -1,10 +1,12 @@
 import { useState, FC, ReactElement, FormEventHandler } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
+import { Send } from '@mui/icons-material';
 
 interface ChatFormProps {
   username: string;
   onSend: (message: string) => void;
 };
+
 
 // = styles =
 const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hover': { backgroundColor: 'secondary.light', } }
@@ -23,14 +25,14 @@ const ChatForm: FC<ChatFormProps> = ({ username, onSend }): ReactElement => {
     <Box sx={{ display: 'flex', }} >
       <form className='connect' onSubmit={handleSend}>
         <TextField
-          label='Chat'
+          placeholder='Chat'
           value={message}
           onChange={((e) => { setMessage(e.target.value) })}
           variant='filled'
           color='secondary'
           sx={{ backgroundColor: 'primary.dark', }} />
 
-        <Button variant='contained' type='submit' sx={buttonStyle} >Connect</Button>
+        <Button variant='contained' type='submit' sx={buttonStyle} ><Send /></Button>
       </form>
     </Box>
   )
