@@ -18,8 +18,8 @@ const stringToColor = (string: string) => {
   return color;
 };
 
-export const stringAvatar = (name: string) => {
-  const split = name.split(' ');
+export const stringAvatar = (name: string = '') => {
+  const split = name === 'welcome-bot' ? 'Hi' : name.split(' ');
   return {
     sx: {
       bgcolor: stringToColor(name),

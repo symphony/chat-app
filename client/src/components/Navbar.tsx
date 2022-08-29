@@ -75,7 +75,7 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
               variant='button'
               sx={{ fontSize: 'small', marginLeft: '2rem' }}
             >
-              <UserIcon user={props.user} />
+              <UserIcon username={props.user} />
             </Link>)}
           </Box>
           <Typography variant='h5' >{props.user ? 'Welcome, ' + props.user : 'Please Login'}</Typography>

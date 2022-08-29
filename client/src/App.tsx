@@ -16,6 +16,7 @@ import {
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 
+
 // = init =
 // create client connection
 const newSocket = io('/');
@@ -25,8 +26,15 @@ const App = () => {
   const [socket, setSocket] = useState(newSocket || null)
   const [lastPong, setLastPong] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [messages, setMessages] = useState<{ self: boolean, message: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const maxMessages = 15;
 
+  // for debugging
+  useEffect(() => {
+    console.log(username + '\'s socket', socket);
+  }, [socket])
+
+  // user loads page
   useEffect(() => {
     sendPing();
 
@@ -35,25 +43,22 @@ const App = () => {
     });
   }, []);
 
+  // global listeners
   useEffect(() => {
-    // = global listeners =
-    // render server announcements
     socket.on('announce', (data: string) => {
     });
 
-    // render personal alerts
     socket.on('alert', (data: string) => {
     });
 
-    // render incoming messages
-    const maxMessages = 15;
-    socket.on('incoming', (data: string) => {
-      setMessages(() => [...messages, { self: false, message: data }])
+    socket.on('incoming', (data: Message) => {
+      console.log('here');
+      setMessages(() => [...messages, data].slice(Number(messages.length > maxMessages)))
     });
 
-    // render outgoing message
-    socket.on('outgoing', (data: string) => {
-      setMessages(() => [...messages, { self: true, message: data }])
+    socket.on('outgoing', (data: Message) => {
+      console.log('outgoing');
+      setMessages(() => [...messages, data].slice(Number(messages.length > maxMessages)))
     });
 
     // refresh userlist
@@ -63,7 +68,6 @@ const App = () => {
       const onlineCount = data.users.length;
     });
 
-
     // cleanup
     return () => {
       socket.off('announce');
@@ -72,7 +76,8 @@ const App = () => {
       socket.off('outgoing');
       socket.off('newData');
     };
-  }, [socket])
+  }, [])
+
 
   // = functions =
   const sendPing = () => {

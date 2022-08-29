@@ -21,7 +21,6 @@ interface ChatboxProps {
 };
 
 
-
 const Chatbox: FC<ChatboxProps> = ({ username, messages, onSend }): ReactElement => {
   const [dense, setDense] = React.useState(false);
 
@@ -37,25 +36,25 @@ const Chatbox: FC<ChatboxProps> = ({ username, messages, onSend }): ReactElement
 
 
           <List dense={dense}>
-            {username && (
+            {/* {username && (
               <ListItem>
                 <ListItemAvatar>
-                  <UserIcon user={'Hiiiiiiiiiiiiiiiiii'} />
+                  <UserIcon username={'Hiiiiiiiiiiiiiiiiii'} />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={'Welcome Bot'}
+                  primary={'welcome-bot'}
                   secondary={`Hello, ${username}!`}
                 />
               </ListItem>)
-            }
-            {messages.map(({ self, user, message }, i) => (
-              <ListItem>
-                {/* <ListItemAvatar>
-                  <UserIcon user={user} />
-                </ListItemAvatar> */}
+            } */}
+            {messages.map(({ self, sender, message }, i) => (
+              <ListItem key={sender + i}>
+                <ListItemAvatar>
+                  <UserIcon username={sender} />
+                </ListItemAvatar>
                 <ListItemText
-                  primary={message}
-                  secondary={self ? 'You' : null}
+                  primary={sender}
+                  secondary={message}
                 />
               </ListItem>)
             )}

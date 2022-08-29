@@ -52,7 +52,7 @@ export const listen = (httpServer: Server) => {
 
       console.log(username, 'logged in');
       socket.emit('announce', username + ' is online');
-      socket.to(id).emit('incoming', `[welcome-bot] Hello, ${username}!`);
+      socket.to(id).emit('incoming',  { self: false, sender: 'welcome-bot', message: `Hello, ${username}!`});
 
       stats.totalConnections++;
       socket.emit('newData', getUpdatedData());
@@ -69,9 +69,9 @@ export const listen = (httpServer: Server) => {
 
     client.on('send', (body: string) => {
       const message = scrub(body.trim());
-      console.log('sending message', message, 'from', username);
-      socket.to(id).emit('outgoing', `${message} [${username}]`)
-      socket.except(id).emit('incoming', `[${username}] ${message}`)
+      console.log('received', message, 'from', username);
+      socket.except(id).emit('incoming', { self: false, sender: username, message })
+      socket.to(id).emit('outgoing', { self: true, sender: username, message })
     });
 
     // Client Message

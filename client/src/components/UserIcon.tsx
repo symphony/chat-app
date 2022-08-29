@@ -2,18 +2,17 @@ import { FC } from 'react';
 import { stringAvatar } from 'helpers';
 
 // = components =
-import { Button, Link, Avatar } from '@mui/material';
+import { Button,  Avatar } from '@mui/material';
 
 interface UserIconProps {
-  user: string;
+  username: string;
 };
 
-const UserIcon: FC<UserIconProps> = ({ user }) => {
+const UserIcon: FC<UserIconProps> = ({ username }) => {
 
   return (
-
     <Button>
-      <Avatar {...stringAvatar(user)} />
+      <Avatar {...stringAvatar(username)} />
     </Button>
   )
 };
