@@ -1,7 +1,15 @@
 {
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Chatting App to demonstrate Socket.io library",
+  "repository": "git@github.com:symphony/chat-app.git",
+  "author": "symphony <jciurc@gmail.com>",
+  "license": "ISC",
+  "proxy": "http://localhost:3001",
+  "main": "index.js",
   "scripts": {
-    "start": "yarn run dev",
-    "dev": "snowpack dev",
+    "start": "snowpack dev",
+    "dev": "snowpack dev --reload --mode development",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
