@@ -29,6 +29,7 @@ module.exports = {
     "@app": "./src/",
     components: "./src/components",
     styles: "./src/styles",
+    mui: "./src/mui",
   },
   exclude:
     ['**/node_modules/**/*'],
