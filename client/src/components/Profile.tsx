@@ -5,7 +5,7 @@ interface ProfileProps {
   user?: string;
 }
 
-const Profile: FC<ProfileProps> = (props) => {
+const Profile: FC<ProfileProps> = (): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,

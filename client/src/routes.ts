@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // pages
-import Chat from 'components/Chat';
+import Home from 'components/Home';
 import Profile from 'components/Profile';
 
 interface Route {
@@ -14,16 +14,16 @@ interface Route {
 
 export const routes: Array<Route> = [
   {
-    key: 'chat-route',
-    title: 'Chat',
+    key: 'home-route',
+    title: 'Home',
     path: '/',
     enabled: true,
-    component: Chat,
+    component: Home,
   },
   {
     key: 'profile-route',
     title: 'Profile',
-    path: '/',
+    path: '/profile',
     enabled: true,
     component: Profile,
   },

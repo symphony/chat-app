@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   Box,
   CssBaseline,
@@ -6,12 +6,13 @@ import {
   Typography,
   ThemeProvider
 } from '@mui/material';
+
 import { routes as appRoutes } from './routes';
 import { appTheme } from './themes';
 
 // Components
-import Chat from 'components/Chat';
-import Profile from 'components/Profile';
+import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
 
       <Box height='100vh' display='flex' flexDirection='column'      >
         <Router>
+          <Navbar />
           <Routes>
             {appRoutes.map((route) => (
               <Route
@@ -30,6 +32,7 @@ const App = () => {
               />
             ))}
           </Routes>
+          <Footer />
         </Router>
       </Box>
 

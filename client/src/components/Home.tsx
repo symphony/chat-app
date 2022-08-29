@@ -1,11 +1,11 @@
 import React, { ReactElement, FC } from "react";
 import { Box, Typography } from '@mui/material';
 
-interface ChatProps {
+interface HomeProps {
   user?: string;
 }
 
-const Chat: FC<ChatProps> = (props) => {
+const Home: FC<HomeProps> = (props): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,
@@ -19,4 +19,4 @@ const Chat: FC<ChatProps> = (props) => {
   );
 };
 
-export default Chat;
+export default Home;
