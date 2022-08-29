@@ -31,7 +31,7 @@ const App = () => {
 
   // for debugging
   useEffect(() => {
-    console.log(username + '\'s socket', socket);
+    // console.log(username + '\'s socket', socket);
   }, [socket])
 
   // user loads page
@@ -52,13 +52,8 @@ const App = () => {
     });
 
     socket.on('incoming', (data: Message) => {
-      console.log('here');
-      setMessages(() => [...messages, data].slice(Number(messages.length > maxMessages)))
-    });
-
-    socket.on('outgoing', (data: Message) => {
-      console.log('outgoing');
-      setMessages(() => [...messages, data].slice(Number(messages.length > maxMessages)))
+      console.log('incoming');
+      setMessages(() => [...messages, data].slice(messages.length >= maxMessages ? 1 : 0))
     });
 
     // refresh userlist
@@ -70,10 +65,10 @@ const App = () => {
 
     // cleanup
     return () => {
+      socket.off('pong');
       socket.off('announce');
       socket.off('alert');
       socket.off('incoming');
-      socket.off('outgoing');
       socket.off('newData');
     };
   }, [])
