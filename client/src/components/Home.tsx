@@ -4,8 +4,8 @@ import ChatForm from 'components/ChatForm';
 import Chatbox from 'components/Chatbox';
 
 interface HomeProps {
-  username?: string;
-  messages?: [];
+  username: string;
+  messages: [];
   onSend: (message: string) => void;
 };
 
