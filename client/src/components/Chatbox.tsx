@@ -26,9 +26,9 @@ const Chatbox: FC<ChatboxProps> = ({ username, messages, onSend }): ReactElement
   const [dense, setDense] = React.useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: '60vw', backgroundColor: 'primary.main', }}>
+    <Box sx={{ m: 4, flexGrow: 1, maxWidth: '60vw', backgroundColor: 'primary.light', }}>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ m: 2 }}>
         <Grid item xs={12} md={6}>
           <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
             Global Chat
@@ -37,15 +37,17 @@ const Chatbox: FC<ChatboxProps> = ({ username, messages, onSend }): ReactElement
 
 
           <List dense={dense}>
-            <ListItem>
-              <ListItemAvatar>
-                <UserIcon user={'Hiiiiiiiiiiiiiiiiii'} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={'Welcome Bot'}
-                secondary={`Hello, ${username}!`}
-              />
-            </ListItem>
+            {username && (
+              <ListItem>
+                <ListItemAvatar>
+                  <UserIcon user={'Hiiiiiiiiiiiiiiiiii'} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={'Welcome Bot'}
+                  secondary={`Hello, ${username}!`}
+                />
+              </ListItem>)
+            }
             {messages.map(({ self, user, message }, i) => (
               <ListItem>
                 {/* <ListItemAvatar>
