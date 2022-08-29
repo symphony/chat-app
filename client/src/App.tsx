@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 
 import { routes as appRoutes } from './routes';
-import { appTheme } from './themes';
+import { lightTheme, darkTheme } from './themes';
 
 // Components
 import Navbar from 'components/Navbar';
@@ -17,7 +17,7 @@ import Footer from 'components/Footer';
 
 const App = () => {
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
 
       <Box height='100vh' display='flex' flexDirection='column'  >

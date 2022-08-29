@@ -69,7 +69,7 @@ const Navbar: FC = (): ReactElement => {
               variant="button"
               sx={{ fontSize: "large", marginLeft: "2rem" }}
             >
-              <Button><Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar></Button>
+              <Button><Avatar sx={{ bgcolor: 'secondary.light' }}>OP</Avatar></Button>
             </Link>
           </Box>
           <Login />

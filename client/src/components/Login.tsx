@@ -1,4 +1,8 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, useState, FormEventHandler, } from 'react';
+import io, { Socket, ServerOptions } from 'socket.io';
+import { AccountCircle } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
+import { routes } from '../routes';
 import {
   Box,
   Button,
@@ -10,44 +14,66 @@ import {
   MenuItem,
   Toolbar,
   Typography,
-} from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { routes } from "../routes";
-const { home, profile } = routes;
+} from '@mui/material';
 
+// Constants
+const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hover': { backgroundColor: 'secondary.light', } }
+
+// Helpers
+const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 
 const Login: FC = (): ReactElement => {
+  const [username, setUsername] = useState('');
+  const [mainSocket, setMainSocket] = createSocket('/');
+  let userSocket: Socket | null = null;
+
+  // Functions
+  const handleConnect: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    setUsername('');
+  };
+
+  const handleDisconnect: FormEventHandler = () => {
+    return;
+  };
+
   return (
-    <Box className='login'>
-      <div className="container">
-        <header className="col s6 right-align">
-          <h4 className="">Please Login</h4>
-        </header>
+    <Box display='flex' className='login' sx={{
+      flexGrow: 1,
+      display: 'flex',
+      justifyContent: 'space-around',
+      flexWrap: 'nowrap',
+    }}>
+      {true && (
+        <Box sx={{ display: 'flex', }} >
+          <Typography variant='h5' >Please Login</Typography>
 
-        <form className="row connect col s6">
-          <div className="input-field col s8">
-            <i className="material-icons prefix">account_circle</i>
-            <TextField type="text" name="username" className="validate blue-grey darken-4 white-text text-accent-3"
-              maxlength="30" />
-            <label for="username" className="">Username</label>
-          </div>
+          <form className='connect' onSubmit={handleConnect}>
+            <AccountCircle />
+            <TextField
+              label='Username'
+              value={username}
+              onChange={((e) => { setUsername(e.target.value) })}
+              variant='filled'
+              color='secondary'
+              sx={{ backgroundColor: 'primary.dark', }} />
 
-          <a href="#" className="col s4">
-            <Button variant="contained" type="submit" className="btn waves-effect">Connect</Button>
-          </a>
-        </form>
-      </div>
+            <Button variant='contained' type='submit' sx={buttonStyle} >Connect</Button>
+          </form>
+        </Box>
+      )
+      }
 
 
-      <form className="disconnect center-align">
-        <a href="#">
-          <Button variant="contained" type="button" className="btn waves-effect">Disconnect</Button>
-        </a>
-      </form>
-      <TextField id="outlined-basic" label="Username" variant="outlined" />
-      <Button variant="contained">Login</Button>
-      <Button variant="contained">Logout</Button>
-    </Box>
+      {
+        true && (
+          <form className='disconnect'>
+            <Button variant='contained' onClick={handleDisconnect} sx={buttonStyle} >Disconnect</Button>
+          </form>
+        )
+      }
+    </Box >
   );
 };
 

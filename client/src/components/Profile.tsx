@@ -9,12 +9,11 @@ const Profile: FC<ProfileProps> = (): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,
-      backgroundColor: 'whitesmoke',
+      backgroundColor: 'primary.dark',
       display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: 'start',
     }}>
-      <Typography variant="h3">User Profile</Typography>
+      <Typography variant='h5' color='textLight'>User Profile</Typography>
     </Box>
   );
 };

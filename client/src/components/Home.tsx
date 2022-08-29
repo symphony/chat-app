@@ -9,12 +9,12 @@ const Home: FC<HomeProps> = (props): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,
-      backgroundColor: 'whitesmoke',
+      backgroundColor: 'primary.dark',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <Typography variant='h3'>Global Chat</Typography>
+      <Typography color='textLight'variant='h3'>Global Chat</Typography>
     </Box>
   );
 };
