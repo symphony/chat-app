@@ -1,8 +1,5 @@
-import React, { FC, ReactElement, useState, FormEventHandler, } from 'react';
-import io, { Socket, ServerOptions } from 'socket.io';
+import { FC, ReactElement, useState, FormEventHandler, } from 'react';
 import { AccountCircle } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
-import { routes } from '../routes';
 import {
   Box,
   Button,
@@ -16,28 +13,33 @@ import {
   Typography,
 } from '@mui/material';
 
-// Constants
+// = types =
+interface LoginProps {
+  onConnect: (username: string) => void;
+  onDisconnect: () => void;
+};
+
+// = constants =
 const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hover': { backgroundColor: 'secondary.light', } }
 
-// Helpers
-const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 
-const Login: FC = (): ReactElement => {
+// = main component =
+const Login: FC<LoginProps> = ({ onConnect, onDisconnect }): ReactElement => {
+  // = hooks =
   const [username, setUsername] = useState('');
-  const [mainSocket, setMainSocket] = createSocket('/');
-  let userSocket: Socket | null = null;
 
-  // Functions
+  // = functions =
   const handleConnect: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-
+    onConnect(username);
     setUsername('');
   };
 
   const handleDisconnect: FormEventHandler = () => {
-    return;
+    onDisconnect();
   };
 
+  // = render =
   return (
     <Box display='flex' className='login' sx={{
       flexGrow: 1,

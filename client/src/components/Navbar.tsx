@@ -1,7 +1,7 @@
-import React, { FC, ReactElement } from "react";
-
-// material ui
+import { FC, ReactElement } from "react";
 import { deepPurple } from "@mui/material/colors";
+import { NavLink } from "react-router-dom";
+import { routes } from "routes";
 import {
   Box,
   Link,
@@ -12,14 +12,18 @@ import {
   Button,
 } from "@mui/material";
 
-// app data
-import { NavLink } from "react-router-dom";
-import { routes } from "../routes";
-
-// components
+// = components =
 import Login from "./Login";
 
-const Navbar: FC = (): ReactElement => {
+// = types =
+interface NavbarProps {
+  onConnect: (username: string) => void;
+  onDisconnect: () => void;
+};
+
+
+// = main component =
+const Navbar: FC<NavbarProps> = (props): ReactElement => {
   const { home, profile } = routes;
 
   return (
@@ -72,7 +76,7 @@ const Navbar: FC = (): ReactElement => {
               <Button><Avatar sx={{ bgcolor: 'secondary.light' }}>OP</Avatar></Button>
             </Link>
           </Box>
-          <Login />
+          <Login {...props} />
         </Toolbar>
       </Container>
     </Box>
