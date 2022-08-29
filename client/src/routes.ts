@@ -9,7 +9,7 @@ interface Route {
   title: string;
   path: string;
   enabled: boolean;
-  component: FC<{}>;
+  component: FC<any>;
 };
 
 export const routes: { [key: string]: Route } = {

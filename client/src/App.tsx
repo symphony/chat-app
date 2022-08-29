@@ -117,7 +117,7 @@ const App = () => {
               <Route
                 key={route.key}
                 path={route.path}
-                element={<route.component username={username} messages={messages} onSend={onSend}/>}
+                element={<route.component username={username} messages={messages} onSend={onSend} />}
               />
             ))}
           </Routes>
