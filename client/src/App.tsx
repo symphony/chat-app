@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import io from 'socket.io-client';
-import { Server, Socket, ServerOptions } from 'socket.io'; // types
+import io, { SocketOptions } from 'socket.io-client';
+import { Server, ServerOptions } from 'socket.io'; // types
 import { lightTheme, darkTheme } from 'themes';
 import { routes as appRoutes } from 'routes';
 import {
@@ -16,22 +16,78 @@ import {
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 
-// = helpers =
-const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
+const socket = io();
 
+// = helpers =
+// @ts-ignore // false positive
+const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 
 // = main component =
 const App = () => {
-  const [mainSocket, setMainSocket] = useState(null);
+  const [currentUser, setCurrentUser] = useState(socket.connected ? 'user' : null);
+  const [header, setHeader] = useState(currentUser || '');
+  const [lastPong, setLastPong] = useState<string | null>(null);
 
-  // Event Handlers
+  useEffect(() => {
+    // = global listeners =
+    socket.on('pong', () => {
+      setLastPong(new Date().toISOString());
+    });
+
+    // render server announcements
+    socket.on('announce', (data: string) => {
+    });
+
+    // render personal alerts
+    socket.on('alert', (data: string) => {
+    });
+
+    // render incoming messages
+    const maxMessages = 15;
+    socket.on('incoming', (data: string) => {
+    });
+
+    // render outgoing message
+    socket.on('outgoing', (data: string) => {
+    });
+
+    // refresh userlist
+    socket.on('newData', (data: { users: User[], hits: number }) => {
+      const maxUsers = 20;
+      const users = [];
+      const onlineCount = data.users.length;
+    });
+
+
+    // cleanup
+    return () => {
+      socket.off('announce');
+      socket.off('alert');
+      socket.off('incoming');
+      socket.off('outgoing');
+      socket.off('newData');
+      socket.off('pong');
+    };
+  }, []);
+
+  // = functions =
+  const sendPing = () => {
+    socket.emit('ping');
+  }
+
   const onConnect = (username: string) => {
-    setMainSocket(createSocket('/'));
-    return;
+    console.log('username set', username);
+    const socket = createSocket('/users');
+
+    socket.emit('login', { username }, (e: Error | null, message: string) => {
+      if (e) return console.error(e.message);
+      setCurrentUser(username);
+      setHeader(message);
+    });
   };
 
   const onDisconnect = () => {
-    return;
+    setCurrentUser(null);
   };
 
 
@@ -51,6 +107,8 @@ const App = () => {
                 element={<route.component />}
               />
             ))}
+
+            <p>Last pong: {lastPong || '-'}</p>
           </Routes>
           <Footer />
         </Router>

@@ -31,6 +31,10 @@ const Login: FC<LoginProps> = ({ onConnect, onDisconnect }): ReactElement => {
   // = functions =
   const handleConnect: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    // form validation
+    if (!username) return;
+
     onConnect(username);
     setUsername('');
   };
@@ -41,7 +45,7 @@ const Login: FC<LoginProps> = ({ onConnect, onDisconnect }): ReactElement => {
 
   // = render =
   return (
-    <Box display='flex' className='login' sx={{
+    <Box sx={{
       flexGrow: 1,
       display: 'flex',
       justifyContent: 'space-around',

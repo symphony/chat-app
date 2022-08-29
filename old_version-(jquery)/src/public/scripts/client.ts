@@ -153,6 +153,7 @@ const listenGlobal = (socket: Socket) => {
     $userlist.find('ul').html('').append(...users);
   });
 };
+
 function trimList($messageList: JQuery<HTMLUListElement>, maxMessages: number) {
   if ($messageList.find('li').length > maxMessages) {
     $messageList.find('li').slice(0, 1).remove();
