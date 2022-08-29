@@ -17,6 +17,7 @@ import Login from "./Login";
 
 // = types =
 interface NavbarProps {
+  header: string;
   onConnect: (username: string) => void;
   onDisconnect: () => void;
 };

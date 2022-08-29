@@ -15,6 +15,7 @@ import {
 
 // = types =
 interface LoginProps {
+  header: string;
   onConnect: (username: string) => void;
   onDisconnect: () => void;
 };
@@ -24,7 +25,7 @@ const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hove
 
 
 // = main component =
-const Login: FC<LoginProps> = ({ onConnect, onDisconnect }): ReactElement => {
+const Login: FC<LoginProps> = ({ header, onConnect, onDisconnect }): ReactElement => {
   // = hooks =
   const [username, setUsername] = useState('');
 
@@ -53,7 +54,7 @@ const Login: FC<LoginProps> = ({ onConnect, onDisconnect }): ReactElement => {
     }}>
       {true && (
         <Box sx={{ display: 'flex', }} >
-          <Typography variant='h5' >Please Login</Typography>
+          <Typography variant='h5' >{header}</Typography>
 
           <form className='connect' onSubmit={handleConnect}>
             <AccountCircle />

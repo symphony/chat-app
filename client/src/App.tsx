@@ -24,9 +24,10 @@ const createSocket = (url?: string, options?: ServerOptions): Server => io(optio
 
 // = main component =
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(socket.connected ? 'user' : null);
-  const [header, setHeader] = useState(currentUser || '');
+  const [isConnected, setIsConnected] = useState(socket.connected);
   const [lastPong, setLastPong] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
+  const [header, setHeader] = useState(currentUser || 'Please Login');
 
   useEffect(() => {
     // = global listeners =
@@ -98,7 +99,8 @@ const App = () => {
 
       <Box height='100vh' display='flex' flexDirection='column'  >
         <Router>
-          <Navbar onConnect={onConnect} onDisconnect={onDisconnect} />
+          <Navbar header={header} onConnect={onConnect} onDisconnect={onDisconnect} />
+
           <Routes>
             {Object.values(appRoutes).map((route) => (
               <Route
@@ -107,9 +109,9 @@ const App = () => {
                 element={<route.component />}
               />
             ))}
-
-            <p>Last pong: {lastPong || '-'}</p>
           </Routes>
+
+          <p>Last pong: {lastPong || '-'}</p>
           <Footer />
         </Router>
       </Box>
