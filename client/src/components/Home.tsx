@@ -1,4 +1,4 @@
-import React, { ReactElement, FC } from "react";
+import React, { ReactElement, FC } from 'react';
 import { Box, Typography } from '@mui/material';
 
 interface HomeProps {
@@ -14,7 +14,7 @@ const Home: FC<HomeProps> = (props): ReactElement => {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <Typography variant="h3">Global Chat</Typography>
+      <Typography variant='h3'>Global Chat</Typography>
     </Box>
   );
 };

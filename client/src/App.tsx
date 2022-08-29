@@ -20,7 +20,7 @@ const App = () => {
     <ThemeProvider theme={appTheme}>
       <CssBaseline />
 
-      <Box height='100vh' display='flex' flexDirection='column'      >
+      <Box height='100vh' display='flex' flexDirection='column'  >
         <Router>
           <Navbar />
           <Routes>
