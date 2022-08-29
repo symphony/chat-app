@@ -12,8 +12,9 @@ module.exports = {
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-webpack',
-    '@snowpack/plugin-typescript', // TS support
-    'snowpack-plugin-svgr' // import SVG as React component
+    '@snowpack/plugin-typescript',
+    'snowpack-plugin-svgr',
+    '@snowpack/plugin-sass',
   ],
   /* for local SPA fallback routing support, more below */
   routes: [
