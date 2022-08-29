@@ -30,7 +30,7 @@ const ChatForm: FC<ChatFormProps> = ({ username, onSend }): ReactElement => {
           onChange={((e) => { setMessage(e.target.value) })}
           variant='filled'
           color='secondary'
-          sx={{ backgroundColor: 'primary.dark', }} />
+          sx={{ backgroundColor: 'primary.main', }} />
 
         <Button variant='contained' type='submit' sx={buttonStyle} ><Send /></Button>
       </form>

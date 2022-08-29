@@ -1,5 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import UserIcon from './UserIcon';
+import ChatForm from 'components/ChatForm';
+
 
 import {
   Box,
@@ -9,45 +11,53 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  styled,
 } from '@mui/material';
 
 // = types =
 interface ChatboxProps {
+  username: string;
   messages: [];
+  onSend: (message: string) => void;
 };
 
-const Demo = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-}));
 
-const Chatbox: FC<ChatboxProps> = ({ messages }): ReactElement => {
+
+const Chatbox: FC<ChatboxProps> = ({ username, messages, onSend }): ReactElement => {
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+    <Box sx={{ flexGrow: 1, maxWidth: '60vw', backgroundColor: 'primary.light', }}>
 
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            General Chat
+          <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
+            Global Chat
           </Typography>
-          <Demo>
-            <List dense={dense}>
-              {messages.map(({ self, user, message }, i) => (
-                <ListItem>
-                  <ListItemAvatar>
-                    <UserIcon user={user} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                </ListItem>)
-              )}
-            </List>
-          </Demo>
+          {username && <ChatForm username={username} onSend={onSend} />}
+
+
+          <List dense={dense}>
+            <ListItem>
+              <ListItemAvatar>
+                <UserIcon user={'abc'} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={'message'}
+                secondary={true ? 'You' : null}
+              />
+            </ListItem>
+            {messages.map(({ self, user, message }, i) => (
+              <ListItem>
+                {/* <ListItemAvatar>
+                  <UserIcon user={user} />
+                </ListItemAvatar> */}
+                <ListItemText
+                  primary={message}
+                  secondary={self ? 'You' : null}
+                />
+              </ListItem>)
+            )}
+          </List>
         </Grid>
       </Grid>
     </Box>

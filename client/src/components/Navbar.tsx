@@ -66,7 +66,17 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
             >
             </Typography>
 
-            {props.user && <UserIcon user={props.user} />}
+            {props.user && (<Link
+              key={profile.key}
+              component={NavLink}
+              to={profile.path}
+              color='black'
+              underline='none'
+              variant='button'
+              sx={{ fontSize: 'small', marginLeft: '2rem' }}
+            >
+              <UserIcon user={props.user} />
+            </Link>)}
           </Box>
           <Typography variant='h5' >{props.user ? 'Welcome, ' + props.user : 'Please Login'}</Typography>
           <Login {...props} />
