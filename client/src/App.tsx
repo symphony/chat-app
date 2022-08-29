@@ -102,7 +102,7 @@ const App = () => {
 
       <Box height='100vh' display='flex' flexDirection='column'  >
         <Router>
-          <Navbar header={header} onConnect={onConnect} onDisconnect={onDisconnect} />
+          <Navbar user={currentUser}  onConnect={onConnect} onDisconnect={onDisconnect} />
 
           <Routes>
             {Object.values(appRoutes).map((route) => (

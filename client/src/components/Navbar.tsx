@@ -2,6 +2,7 @@ import { FC, ReactElement } from "react";
 import { deepPurple } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { routes } from "routes";
+import { stringAvatar } from '../helpers';
 import {
   Box,
   Link,
@@ -17,7 +18,7 @@ import Login from "./Login";
 
 // = types =
 interface NavbarProps {
-  header: string;
+  user: string | null;
   onConnect: (username: string) => void;
   onDisconnect: () => void;
 };
@@ -74,13 +75,17 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
               variant="button"
               sx={{ fontSize: "large", marginLeft: "2rem" }}
             >
-              <Button><Avatar sx={{ bgcolor: 'secondary.light' }}>OP</Avatar></Button>
             </Link>
           </Box>
           <Login {...props} />
+          {props.user && (
+            <Button>
+              <Avatar {...stringAvatar(props.user)} />
+            </Button>
+          )}
         </Toolbar>
-      </Container>
-    </Box>
+      </Container >
+    </Box >
   );
 };
 

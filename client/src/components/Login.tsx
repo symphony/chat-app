@@ -15,7 +15,7 @@ import {
 
 // = types =
 interface LoginProps {
-  header: string;
+  user: string | null;
   onConnect: (username: string) => void;
   onDisconnect: () => void;
 };
@@ -25,7 +25,7 @@ const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hove
 
 
 // = main component =
-const Login: FC<LoginProps> = ({ header, onConnect, onDisconnect }): ReactElement => {
+const Login: FC<LoginProps> = ({ user, onConnect, onDisconnect }): ReactElement => {
   // = hooks =
   const [username, setUsername] = useState('');
 
@@ -52,9 +52,9 @@ const Login: FC<LoginProps> = ({ header, onConnect, onDisconnect }): ReactElemen
       justifyContent: 'space-around',
       flexWrap: 'nowrap',
     }}>
-      {true && (
+      {!user && (
         <Box sx={{ display: 'flex', }} >
-          <Typography variant='h5' >{header}</Typography>
+          <Typography variant='h5' >{user || 'Please login'}</Typography>
 
           <form className='connect' onSubmit={handleConnect}>
             <AccountCircle />
@@ -69,17 +69,14 @@ const Login: FC<LoginProps> = ({ header, onConnect, onDisconnect }): ReactElemen
             <Button variant='contained' type='submit' sx={buttonStyle} >Connect</Button>
           </form>
         </Box>
-      )
-      }
+      )}
 
 
-      {
-        true && (
-          <form className='disconnect'>
-            <Button variant='contained' onClick={handleDisconnect} sx={buttonStyle} >Disconnect</Button>
-          </form>
-        )
-      }
+      {user && (
+        <form className='disconnect'>
+          <Button variant='contained' onClick={handleDisconnect} sx={buttonStyle} >Disconnect</Button>
+        </form>
+      )}
     </Box >
   );
 };
