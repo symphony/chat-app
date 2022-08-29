@@ -8,9 +8,9 @@
   "proxy": "http://localhost:3001",
   "main": "index.js",
   "scripts": {
+    "build": "snowpack build",
     "start": "snowpack dev",
     "dev": "snowpack dev --reload --mode development",
-    "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
