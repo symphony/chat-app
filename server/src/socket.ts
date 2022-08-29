@@ -40,6 +40,10 @@ export const listen = (httpServer: Server) => {
     console.log(id, 'connected');
 
     // = events =
+    client.on('ping', () => {
+      socket.to(id).emit('pong');
+    });
+
     // user logs in
     client.on('login', (body: { username: string }, callback) => {
       username = scrub(removeSymbols(body.username));

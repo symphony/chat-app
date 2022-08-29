@@ -30,6 +30,8 @@ const App = () => {
   const [header, setHeader] = useState(currentUser || 'Please Login');
 
   useEffect(() => {
+    sendPing();
+
     // = global listeners =
     socket.on('pong', () => {
       setLastPong(new Date().toISOString());
@@ -70,6 +72,7 @@ const App = () => {
       socket.off('pong');
     };
   }, []);
+
 
   // = functions =
   const sendPing = () => {
