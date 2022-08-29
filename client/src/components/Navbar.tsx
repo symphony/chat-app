@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import { deepPurple } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { routes } from "routes";
-import { stringAvatar } from '../helpers';
+import { stringAvatar } from 'helpers';
 import {
   Box,
   Link,

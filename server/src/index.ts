@@ -1,6 +1,6 @@
 // = modules =
 import express from 'express';
-import * as socketServer from './socket';
+import * as socketServer from './server';
 
 // = server config =
 const PORT = process.env.PORT || 3001;

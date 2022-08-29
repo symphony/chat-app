@@ -1,4 +1,4 @@
-import { useState, useEffect, } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import io, { SocketOptions } from 'socket.io-client';
 import { Server, ServerOptions } from 'socket.io'; // types
@@ -15,29 +15,29 @@ import {
 // = components =
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
+import Chatbox from 'components/Chatbox';
 
 // = init =
 // create client connection
-const socket = io();
-
-// = helpers =
-// @ts-ignore // false positive?
-const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
+const newSocket = io('/');
 
 // = main component =
 const App = () => {
+  const [socket, setSocket] = useState(newSocket || null)
   const [lastPong, setLastPong] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
-  const [header, setHeader] = useState(currentUser || 'Please Login');
+  const [messages, setMessages] = useState<{ self: boolean, message: string }[]>([]);
 
   useEffect(() => {
     sendPing();
 
-    // = global listeners =
     socket.on('pong', () => {
       setLastPong(new Date().toISOString());
     });
+  }, []);
 
+  useEffect(() => {
+    // = global listeners =
     // render server announcements
     socket.on('announce', (data: string) => {
     });
@@ -49,10 +49,12 @@ const App = () => {
     // render incoming messages
     const maxMessages = 15;
     socket.on('incoming', (data: string) => {
+      setMessages(() => [...messages, { self: false, message: data }])
     });
 
     // render outgoing message
     socket.on('outgoing', (data: string) => {
+      setMessages(() => [...messages, { self: true, message: data }])
     });
 
     // refresh userlist
@@ -70,10 +72,8 @@ const App = () => {
       socket.off('incoming');
       socket.off('outgoing');
       socket.off('newData');
-      socket.off('pong');
     };
-  }, []);
-
+  }, [socket])
 
   // = functions =
   const sendPing = () => {
@@ -81,20 +81,22 @@ const App = () => {
   };
 
   const onConnect = (username: string) => {
-    console.log('username set', username); // For debugging
-    sendPing(); // For debugging
-    const socket = createSocket('/users');
+    sendPing();
+    setSocket(io('/users'));
 
     socket.emit('login', { username }, (e: Error | null, message: string) => {
       if (e) return console.error(e.message);
       setCurrentUser(username);
-      setHeader(message);
     });
   };
 
   const onDisconnect = () => {
-    sendPing(); // For debugging
+    sendPing();
+
+    if (!socket.connected) return;
+    socket.disconnect();
     setCurrentUser(null);
+    setSocket(io('/')); // global socket
   };
 
 
@@ -105,7 +107,7 @@ const App = () => {
 
       <Box height='100vh' display='flex' flexDirection='column'  >
         <Router>
-          <Navbar user={currentUser}  onConnect={onConnect} onDisconnect={onDisconnect} />
+          <Navbar user={currentUser} onConnect={onConnect} onDisconnect={onDisconnect} />
 
           <Routes>
             {Object.values(appRoutes).map((route) => (
@@ -116,7 +118,7 @@ const App = () => {
               />
             ))}
           </Routes>
-
+          <Chatbox messages={messages} />
           <p>Last pong: {lastPong || '-'}</p>
           <Footer />
         </Router>
