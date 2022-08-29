@@ -66,23 +66,23 @@ const Navbar: FC<NavbarProps> = (props): ReactElement => {
             >
             </Typography>
 
-            <Link
-              key={profile.key}
-              component={NavLink}
-              to={profile.path}
-              color="black"
-              underline="none"
-              variant="button"
-              sx={{ fontSize: "large", marginLeft: "2rem" }}
-            >
-            </Link>
+            {props.user && (
+              <Link
+                key={profile.key}
+                component={NavLink}
+                to={profile.path}
+                color="black"
+                underline="none"
+                variant="button"
+                sx={{ fontSize: "large", marginLeft: "2rem" }}
+              >
+                <Button>
+                  <Avatar {...stringAvatar(props.user)} />
+                </Button>
+              </Link>
+            )}
           </Box>
           <Login {...props} />
-          {props.user && (
-            <Button>
-              <Avatar {...stringAvatar(props.user)} />
-            </Button>
-          )}
         </Toolbar>
       </Container >
     </Box >

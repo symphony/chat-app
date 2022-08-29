@@ -16,15 +16,16 @@ import {
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
 
+// = init =
+// create client connection
 const socket = io();
 
 // = helpers =
-// @ts-ignore // false positive
+// @ts-ignore // false positive?
 const createSocket = (url?: string, options?: ServerOptions): Server => io(options);
 
 // = main component =
 const App = () => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
   const [lastPong, setLastPong] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [header, setHeader] = useState(currentUser || 'Please Login');
@@ -77,10 +78,11 @@ const App = () => {
   // = functions =
   const sendPing = () => {
     socket.emit('ping');
-  }
+  };
 
   const onConnect = (username: string) => {
-    console.log('username set', username);
+    console.log('username set', username); // For debugging
+    sendPing(); // For debugging
     const socket = createSocket('/users');
 
     socket.emit('login', { username }, (e: Error | null, message: string) => {
@@ -91,6 +93,7 @@ const App = () => {
   };
 
   const onDisconnect = () => {
+    sendPing(); // For debugging
     setCurrentUser(null);
   };
 
