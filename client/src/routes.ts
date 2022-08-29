@@ -12,19 +12,19 @@ interface Route {
   component: FC<{}>;
 };
 
-export const routes: Array<Route> = [
-  {
+export const routes: { [key: string]: Route } = {
+  home: {
     key: 'home-route',
     title: 'Home',
     path: '/',
     enabled: true,
     component: Home,
   },
-  {
+  profile: {
     key: 'profile-route',
     title: 'Profile',
     path: '/profile',
     enabled: true,
     component: Profile,
   },
-];
+};

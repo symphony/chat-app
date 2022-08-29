@@ -10,8 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
+import { routes } from "../routes";
+const { home, profile } = routes;
 
 const Navbar: FC = (): ReactElement => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,6 +43,17 @@ const Navbar: FC = (): ReactElement => {
               display: { xs: "none", md: "flex" },
             }}
           >
+            <Link
+              key={home.key}
+              component={NavLink}
+              to={home.path}
+              color="black"
+              underline="none"
+              variant="button"
+            >
+              <Typography textAlign="center">{home.title}</Typography>
+
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -72,20 +84,7 @@ const Navbar: FC = (): ReactElement => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {routes.map((page) => (
-                <Link
-                  key={page.key}
-                  component={NavLink}
-                  to={page.path}
-                  color="black"
-                  underline="none"
-                  variant="button"
-                >
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.title}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              Mobile
             </Menu>
           </Box>
           <Typography
@@ -101,24 +100,24 @@ const Navbar: FC = (): ReactElement => {
               sx={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "flex-start",
+                justifyContent: "flex-end",
                 alignItems: "center",
                 marginLeft: "1rem",
               }}
             >
-              {routes.map((page) => (
-                <Link
-                  key={page.key}
-                  component={NavLink}
-                  to={page.path}
-                  color="black"
-                  underline="none"
-                  variant="button"
-                  sx={{ fontSize: "large", marginLeft: "2rem" }}
-                >
-                  {page.title}
-                </Link>
-              ))}
+
+              <Link
+                key={profile.key}
+                component={NavLink}
+                to={profile.path}
+                color="black"
+                underline="none"
+                variant="button"
+                sx={{ fontSize: "large", marginLeft: "2rem" }}
+              >
+                {profile.title}
+              </Link>
+
             </Box>
           </Box>
         </Toolbar>

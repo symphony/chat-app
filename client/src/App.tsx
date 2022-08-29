@@ -24,7 +24,7 @@ const App = () => {
         <Router>
           <Navbar />
           <Routes>
-            {appRoutes.map((route) => (
+            {Object.values(appRoutes).map((route) => (
               <Route
                 key={route.key}
                 path={route.path}
