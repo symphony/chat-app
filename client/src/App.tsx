@@ -1,4 +1,4 @@
-import React from "react";
+// Components
 import {
   Box,
   CssBaseline,
@@ -8,6 +8,9 @@ import {
   createTheme
 } from "@mui/material";
 
+import Home from 'components/Home';
+
+// Declarations
 const theme = createTheme({
   palette: {
     primary: {
@@ -46,6 +49,8 @@ const App = () => {
           </Typography>
         </Paper>
       </Box>
+
+      <Home />
     </ThemeProvider>
   );
 }
