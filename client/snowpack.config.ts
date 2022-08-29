@@ -15,6 +15,7 @@ module.exports = {
     '@snowpack/plugin-typescript',
     'snowpack-plugin-svgr',
     '@snowpack/plugin-sass',
+    'eslint',
   ],
   /* for local SPA fallback routing support, more below */
   routes: [
