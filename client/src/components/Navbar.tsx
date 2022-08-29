@@ -33,14 +33,13 @@ const Navbar: FC = (): ReactElement => {
         backgroundColor: "secondary.main",
       }}
     >
-      <Container maxWidth="xl">
+      <Container >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             sx={{
               mr: 2,
-              display: { xs: "none", md: "flex" },
             }}
           >
             <Link
@@ -55,70 +54,26 @@ const Navbar: FC = (): ReactElement => {
 
             </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              Mobile
-            </Menu>
-          </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            React Starter App
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                marginLeft: "1rem",
-              }}
-            >
+          <Box >
 
-              <Link
-                key={profile.key}
-                component={NavLink}
-                to={profile.path}
-                color="black"
-                underline="none"
-                variant="button"
-                sx={{ fontSize: "large", marginLeft: "2rem" }}
-              >
-                {profile.title}
-              </Link>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+            >
+            </Typography>
 
-            </Box>
+            <Link
+              key={profile.key}
+              component={NavLink}
+              to={profile.path}
+              color="black"
+              underline="none"
+              variant="button"
+              sx={{ fontSize: "large", marginLeft: "2rem" }}
+            >
+              {profile.title}
+            </Link>
           </Box>
         </Toolbar>
       </Container>
