@@ -1,5 +1,5 @@
 import React, { ReactElement, FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import ChatForm from 'components/ChatForm';
 import Chatbox from 'components/Chatbox';
 
@@ -12,15 +12,20 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = ({ username, messages, onSend }): ReactElement => {
   return (
-    <Box sx={{
+    <Box width='100vw' sx={{
       flexGrow: 1,
       backgroundColor: 'primary.dark',
       display: 'flex',
       justifyContent: 'start',
     }}>
-      <Typography color='textLight' variant='h4'>Global Chat</Typography>
-      {username && <ChatForm username={username} onSend={onSend} />}
-      <Chatbox messages={messages} />
+      <header>
+        <Typography color='textLight' variant='h4'>Global Chat</Typography>
+      </header>
+
+      <div>
+        {username && <ChatForm username={username} onSend={onSend} />}
+        <Chatbox messages={messages} />
+      </div>
     </Box>
   );
 };
