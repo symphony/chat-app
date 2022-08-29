@@ -8,7 +8,8 @@ import {
   createTheme
 } from "@mui/material";
 
-import Home from 'components/Home';
+import Chat from 'components/Chat';
+import Profile from 'components/Profile';
 
 // Declarations
 const theme = createTheme({
@@ -33,6 +34,12 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <header>
+        <nav>
+          <Chat />
+          <Profile />
+        </nav>
+      </header>
       <Box
         height="100vh"
         display="flex"
@@ -50,7 +57,6 @@ const App = () => {
         </Paper>
       </Box>
 
-      <Home />
     </ThemeProvider>
   );
 }

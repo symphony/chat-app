@@ -1,11 +1,11 @@
 import React, { ReactElement, FC } from "react";
 import { Box, Typography } from '@mui/material';
 
-interface HomeProps {
+interface ProfileProps {
   user?: string;
 }
 
-const Home: FC<HomeProps> = (props) => {
+const Profile: FC<ProfileProps> = (props) => {
   return (
     <Box sx={{
       flexGrow: 1,
@@ -14,9 +14,9 @@ const Home: FC<HomeProps> = (props) => {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <Typography variant="h3">Home</Typography>
+      <Typography variant="h3">User Profile</Typography>
     </Box>
   );
 };
 
-export default Home;
+export default Profile;
