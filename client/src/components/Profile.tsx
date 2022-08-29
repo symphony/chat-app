@@ -2,10 +2,11 @@ import React, { ReactElement, FC } from "react";
 import { Box, Typography } from '@mui/material';
 
 interface ProfileProps {
-  user?: string;
+  username?: string;
+  messages?: [];
 }
 
-const Profile: FC<ProfileProps> = (): ReactElement => {
+const Profile: FC<ProfileProps> = ({ username = '', messages = [] }): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,
@@ -13,7 +14,7 @@ const Profile: FC<ProfileProps> = (): ReactElement => {
       display: 'flex',
       justifyContent: 'start',
     }}>
-      <Typography variant='h5' color='textLight'>User Profile</Typography>
+      <Typography variant='h5' color='textLight'>User Profile: {username}</Typography>
     </Box>
   );
 };

@@ -20,7 +20,7 @@ interface LoginProps {
   onDisconnect: () => void;
 };
 
-// = constants =
+// = styles =
 const buttonStyle = { color: 'white', backgroundColor: 'secondary.dark', '&:hover': { backgroundColor: 'secondary.light', } }
 
 

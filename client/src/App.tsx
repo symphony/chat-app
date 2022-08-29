@@ -15,7 +15,6 @@ import {
 // = components =
 import Navbar from 'components/Navbar';
 import Footer from 'components/Footer';
-import Chatbox from 'components/Chatbox';
 
 // = init =
 // create client connection
@@ -25,7 +24,7 @@ const newSocket = io('/');
 const App = () => {
   const [socket, setSocket] = useState(newSocket || null)
   const [lastPong, setLastPong] = useState<string | null>(null);
-  const [currentUser, setCurrentUser] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
   const [messages, setMessages] = useState<{ self: boolean, message: string }[]>([]);
 
   useEffect(() => {
@@ -86,7 +85,7 @@ const App = () => {
 
     socket.emit('login', { username }, (e: Error | null, message: string) => {
       if (e) return console.error(e.message);
-      setCurrentUser(username);
+      setUsername(username);
     });
   };
 
@@ -95,8 +94,12 @@ const App = () => {
 
     if (!socket.connected) return;
     socket.disconnect();
-    setCurrentUser(null);
+    setUsername(null);
     setSocket(io('/')); // global socket
+  };
+
+  const onSend = (message: string) => {
+    socket.emit('send', message);
   };
 
 
@@ -107,20 +110,19 @@ const App = () => {
 
       <Box height='100vh' display='flex' flexDirection='column'  >
         <Router>
-          <Navbar user={currentUser} onConnect={onConnect} onDisconnect={onDisconnect} />
+          <Navbar user={username} onConnect={onConnect} onDisconnect={onDisconnect} />
 
           <Routes>
             {Object.values(appRoutes).map((route) => (
               <Route
                 key={route.key}
                 path={route.path}
-                element={<route.component />}
+                element={<route.component username={username} messages={messages}/>}
               />
             ))}
           </Routes>
-          <Chatbox messages={messages} />
-          <p>Last pong: {lastPong || '-'}</p>
-          <Footer />
+
+          <Footer lastPong={lastPong} />
         </Router>
       </Box>
 

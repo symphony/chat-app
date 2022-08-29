@@ -1,20 +1,26 @@
 import React, { ReactElement, FC } from 'react';
 import { Box, Typography } from '@mui/material';
+import ChatForm from 'components/ChatForm';
+import Chatbox from 'components/Chatbox';
 
 interface HomeProps {
-  user?: string;
-}
+  username?: string;
+  messages?: [];
+  onSend: (message: string) => void;
+};
 
-const Home: FC<HomeProps> = (props): ReactElement => {
+
+const Home: FC<HomeProps> = ({ username, messages, onSend }): ReactElement => {
   return (
     <Box sx={{
       flexGrow: 1,
       backgroundColor: 'primary.dark',
       display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
+      justifyContent: 'start',
     }}>
-      <Typography color='textLight'variant='h3'>Global Chat</Typography>
+      <Typography color='textLight' variant='h4'>Global Chat</Typography>
+      {username && <ChatForm username={username} onSend={onSend} />}
+      <Chatbox messages={messages} />
     </Box>
   );
 };
