@@ -1,29 +1,26 @@
 import React, { FC, ReactElement } from "react";
+
+// material ui
+import { deepPurple } from "@mui/material/colors";
 import {
   Box,
   Link,
   Container,
-  IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
+  Avatar,
+  Button,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+
+// app data
 import { NavLink } from "react-router-dom";
 import { routes } from "../routes";
-const { home, profile } = routes;
+
+// components
+import Login from "./Login";
 
 const Navbar: FC = (): ReactElement => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event: any) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const { home, profile } = routes;
 
   return (
     <Box
@@ -72,9 +69,10 @@ const Navbar: FC = (): ReactElement => {
               variant="button"
               sx={{ fontSize: "large", marginLeft: "2rem" }}
             >
-              {profile.title}
+              <Button><Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar></Button>
             </Link>
           </Box>
+          <Login />
         </Toolbar>
       </Container>
     </Box>
