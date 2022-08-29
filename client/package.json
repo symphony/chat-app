@@ -1,45 +1,30 @@
 {
-  "name": "chat-app",
-  "version": "1.0.0",
-  "description": "Chatting App to demonstrate Socket.io library",
-  "repository": "git@github.com:symphony/chat-app.git",
-  "author": "symphony <jciurc@gmail.com>",
-  "license": "ISC",
-  "proxy": "http://localhost:3001",
-  "main": "index.js",
   "scripts": {
-    "build": "snowpack build --config ./snowpack.config.ts",
-    "start": "snowpack dev --config ./snowpack.config.ts --reload",
-    "dev": "snowpack dev --config ./snowpack.config.ts --mode development",
-    "test": "jest --watch"
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
-  "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.10.2",
-    "@mui/material": "^5.10.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "socket.io": "^4.5.1",
-    "socket.io-client": "^4.5.1"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@snowpack/app-scripts-react": "^2.0.1",
-    "@snowpack/plugin-dotenv": "^2.2.0",
+    "@snowpack/plugin-dotenv": "^2.1.0",
     "@snowpack/plugin-react-refresh": "^2.5.0",
-    "@snowpack/plugin-sass": "^1.4.0",
     "@snowpack/plugin-typescript": "^1.2.1",
-    "@snowpack/plugin-webpack": "^3.0.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "12.1.5",
-    "@types/node": "^18.7.13",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "jest": "^29.0.1",
-    "sass": "^1.54.5",
-    "snowpack": "^3.8.8",
-    "snowpack-plugin-svgr": "^0.1.2",
-    "typescript": "^4.8.2"
+    "@snowpack/web-test-runner-plugin": "^0.2.2",
+    "@testing-library/react": "^11.2.6",
+    "@types/chai": "^4.2.17",
+    "@types/mocha": "^8.2.2",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "@types/snowpack-env": "^2.3.3",
+    "@web/test-runner": "^0.13.3",
+    "chai": "^4.3.4",
+    "prettier": "^2.2.1",
+    "snowpack": "^3.3.7",
+    "typescript": "^4.2.4"
   }
 }

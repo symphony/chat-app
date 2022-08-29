@@ -1,22 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles/index.css';
-
+import ReactDOM from 'react-dom';
 import App from './App';
+import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById('app') as HTMLElement);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
 
-// React 18 setup
-// import React from 'react';
-// import { createRoot } from 'react-dom/client';
-// import App from './App';
-// import './styles/index.css';
-
-// const container = document.getElementById('app');
-// const root = createRoot(container!); // createRoot(container!) if you use TypeScript
-// root.render(<App />);
+// Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
+// Learn more: https://snowpack.dev/concepts/hot-module-replacement
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
