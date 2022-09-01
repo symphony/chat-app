@@ -67,11 +67,11 @@ export const listen = (httpServer: Server) => {
       socket.emit('newData', getUpdatedData());
     });
 
-    client.on('send', (body: string) => {
+    client.on('send', (body: string, callback) => {
       const message = scrub(body.trim());
       console.log('received', message, 'from', username);
-      socket.except(id).emit('incoming', { self: false, sender: username, message })
-      socket.to(id).emit('incoming', { self: true, sender: username, message })
+      socket.except(id).emit('incoming', { self: false, sender: username, message });
+      callback({ self: true, sender: username, message });
     });
 
     // Client Message

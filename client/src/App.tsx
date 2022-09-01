@@ -98,7 +98,10 @@ const App = () => {
   };
 
   const onSend = (message: string) => {
-    socket.emit('send', message);
+    socket.emit('send', message, (e: Error | null, data: Message) => {
+      if (e) return console.error(e.message);
+      setMessages(() => [...messages, { ...data }].slice(messages.length >= maxMessages ? 1 : 0))
+    });
   };
 
 
