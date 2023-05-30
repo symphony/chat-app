@@ -15,10 +15,15 @@ https://chat-app-2341.herokuapp.com/
 **Clone the repo** 
 - `git clone git@github.com:symphony/chat-app.git && cd chat-app`
 
-**Start the server**
+**Start the server** 
+- `cd server`
 - `npm run dev`
 
-**Visit the App**
+**Start the client (in separate terminal)** 
+- `cd client`
+- `npm start`
+
+**Visit the App** 
 - [`http://localhost:3000`](http://localhost:3000)
 
 ## Dependencies
